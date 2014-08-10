@@ -1,0 +1,9 @@
+/* TEAM */
+Author: Simon Schoenenberger
+GitHub: https://github.com/detomon/
+Soundcloud: https://soundcloud.com/detomon/
+
+/* SITE */
+Standards: HTML5, CSS3, SVG
+Components: Normalize.css, jQuery
+Software: Sublime Text 2, Sketch, jekyll, Cyberduck

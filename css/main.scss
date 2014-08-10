@@ -1,0 +1,28 @@
+---
+---
+
+$line-height: 1.5em;
+$body-font: normal 12pt open-sans, 'Helvetica Neue', sans-serif;
+$code-font: normal #{0.95em}/#{$line-height} BitstreamVeraSansMono, 'Andale Mono', Consolas, monospace;
+$print-font: normal normal 8pt open-sans, 'Helvetica Neue', sans-serif;
+$text-color: #202020;
+$back-color: #404040;
+$link-color: #6080c0;
+$link-hover-color: #294b8f;
+
+$page-width: 60em;
+$header-height: 5em;
+$footer-height: 10em;
+$footer-top-margin: 5em;
+
+$small-screen-width: #{$page-width * 0.75};
+
+$transition-time: 0.075s;
+
+@import 'normalize';
+@import 'mixins';
+@import 'typography';
+@import 'layout';
+@import 'theme';
+@import 'code';
+@import 'responsive';

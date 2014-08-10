@@ -1,0 +1,108 @@
+/* @group Theme */
+
+strong {
+	font-weight: 600;
+}
+
+a {
+	color: $link-color;
+	text-decoration: none;
+
+	&:hover {
+		color: $link-hover-color;
+	}
+}
+
+.site-footer {
+	.wrapper {
+		padding-top: 1em;
+	}
+
+	.icon {
+		line-height: 2em;
+
+		img {
+			width: 1.5em;
+			height: 1.5em;
+			vertical-align: -0.36em;
+		}
+	}
+}
+
+.button {
+	color: white;
+	background: $link-color;
+	border-radius: 0.5em;
+	padding: 0.2em 0.66em;
+	@include display-inline();
+
+	&:hover {
+		color: white;
+		background-color: $link-hover-color;
+	}
+}
+
+strong .button {
+	font-weight: normal;
+	background-color: $back-color;
+
+	&:hover {
+		background-color: $text-color;
+	}
+}
+
+.buttons {
+	text-align: center;
+	padding: $line-height;
+	background: url(img/lines.svg) center top fixed;
+
+	.button {
+		margin: 0.5em;
+	}
+}
+
+a,
+.button {
+	@each $vendor in $vendors {
+		#{$vendor}transition: color $transition-time, background-color linear $transition-time;
+	}
+}
+
+.site-title,
+.page-meta-nav .icon a {
+	@each $vendor in $vendors {
+		#{$vendor}transition: opacity linear $transition-time;
+	}
+}
+
+.site-title,
+.page-meta-nav .icon a {
+	&:hover {
+		opacity: 0.94;
+	}
+}
+
+h2, h3 {
+	.header-file {
+		font-size: 0.8em;
+
+		var {
+			color: $link-hover-color;
+		}
+	}
+}
+
+/* @end */
+
+@media print {
+
+	.button {
+		color: $text-color;
+		background: transparent;
+	}
+
+	.buttons {
+		background: transparent;
+	}
+
+}

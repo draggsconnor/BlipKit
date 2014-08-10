@@ -1,0 +1,58 @@
+/* @group Code */
+
+pre {
+	background: url(img/lines.svg) center top fixed;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	font-size: 0.9em;
+
+	code {
+		display: block;
+		padding: $line-height;
+		white-space: pre;
+	}
+}
+
+code {
+	.c1, .cm {
+		color: #808080;
+	}
+
+	.mi, .mf {
+		color: #6080c0;
+	}
+}
+
+code, var {
+	font: $code-font;
+	font-style: normal;
+	white-space: nowrap;
+}
+
+
+p {
+	a {
+		var, code {
+			padding: 0.1em 0.5em;
+			color: white;
+			background: #5070b0;
+			border-radius: 0.25em;
+			text-decoration: none;
+		}
+	}
+}
+
+/* @end  */
+
+@media print {
+
+	pre {
+		background: transparent;
+
+		code {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+
+}

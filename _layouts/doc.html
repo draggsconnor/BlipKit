@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<nav class="page-nav">
+	<button class="nav-button">Open page navigation</button>
+	{% include pagetree.html context="/" %}
+</nav>
+<div class="post">
+
+	<header class="post-header">
+		<h1>{% if page.full_title %}{{ page.full_title }}{% else %}{{ page.title }}{% endif %}</h1>
+	</header>
+
+	<article class="post-content">
+		{{ content }}
+	</article>
+
+</div>

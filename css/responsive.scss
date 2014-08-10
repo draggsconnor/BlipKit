@@ -1,0 +1,37 @@
+@media only screen and (max-width: $small-screen-width) {
+
+	.page-nav {
+		top: 0;
+		left: 0;
+		right: 0;
+		width: auto;
+		position: absolute;
+		font-size: 1.5em;
+
+		& + .post {
+			margin-right: 0;
+
+			h1 {
+				padding-right: 1.33em;
+			}
+		}
+
+		.nav-button {
+			display: block;
+		}
+
+		&.open {
+			ul {
+				display: block;;
+			}
+		}
+
+		& > ul {
+			padding-bottom: #{$line-height * 2};
+			@include box-shadow(0px, 2em, 4em, white);
+			background: white;
+			display: none;
+		}
+	}
+
+}

@@ -1,0 +1,9 @@
+# Send UTF-8 as default encoding for text files
+AddDefaultCharset UTF-8
+
+# Compress files
+<IfModule mod_deflate.c>
+	AddOutputFilter DEFLATE js css
+	AddOutputFilter DEFLATE svg ttf
+	AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
+</IfModule>

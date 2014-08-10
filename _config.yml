@@ -1,0 +1,15 @@
+# Site settings
+title: BlipKit Soundchip Simulation Library
+short_title: BlipKit
+email: simon@monoxid.net
+description: "BlipKit is a C library for simulating old sound chips. It generates waveforms like square and triangle waves on different tracks with multiple channels. Some effects are available and with instruments it is possible to create envelopes."
+baseurl: "/BlipKit"
+url: "http://detomon.github.io"
+github_username:  detomon
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+sass:
+  sass_dir: css

@@ -1,0 +1,28 @@
+<header class="site-header">
+
+	<div class="wrapper">
+
+		{% include meta-nav.html %}
+
+		<div class="site-title">
+			<a href="{{ site.baseurl }}/">{{ site.title }}</a>
+		</div>
+
+		{% include navigation.html %}
+
+		<!--<nav class="site-nav">
+			<ul>
+				{% for navpage in site.pages %}
+					{% assign current = nil %}
+					{% if page.url == navpage.url or page.layout == navpage.layout %}
+						{% assign current = 'current' %}
+					{% endif %}
+
+					{% if navpage.title %}<li class="{{ current }}"><a class="page-link" href="{{ navpage.url | prepend: site.baseurl }}">{{ navpage.title }}</a></li>{% endif %}
+				{% endfor %}
+			</ul>
+		</nav>-->
+
+	</div>
+
+</header>
