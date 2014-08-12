@@ -2,6 +2,6 @@
 layout: doc
 title: Envelopes
 full_title: Instrument envelopes
-order: 14
+order: 20
 ---
 

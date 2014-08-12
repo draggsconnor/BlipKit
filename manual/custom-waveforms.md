@@ -1,6 +1,6 @@
 ---
 layout: doc
 title: Custom waveforms
-order: 16
+order: 25
 ---
 

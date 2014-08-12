@@ -1,6 +1,6 @@
 ---
 layout: doc
 title: Effects
-order: 12
+order: 10
 ---
 

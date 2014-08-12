@@ -1,6 +1,6 @@
 ---
 layout: doc
 title: Instruments
-order: 13
+order: 15
 ---
 
