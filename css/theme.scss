@@ -52,9 +52,16 @@ strong .button {
 }
 
 .buttons {
-	text-align: center;
 	padding: $line-height;
 	background: url(img/lines.svg) center top fixed;
+
+	* + & {
+		margin-top: $line-height;
+	}
+}
+
+.buttons {
+	text-align: center;
 
 	.button {
 		margin: 0.5em;

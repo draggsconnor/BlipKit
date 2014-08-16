@@ -55,12 +55,24 @@ pre, code, var {
 	font: $code-font;
 }
 
+dl, menu, ol, ul {
+	margin: $line-height 0;
+}
+
 dt {
-	margin-bottom: 0.5em;
+	margin-bottom: #{$line-height / 2};
 }
 
 dd {
 	margin-left: 2em;
+
+	& + dt {
+		margin-top: $line-height;
+	}
+
+	& > p:first-child {
+		margin-top: 0;
+	}
 }
 
 img {
