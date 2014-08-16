@@ -94,6 +94,47 @@ h2, h3 {
 
 /* @end */
 
+/* @group Sound */
+
+.player {
+	width: 1em;
+	height: 1em;
+	font-size: 3em;
+	border-radius: 1.1em;
+	text-indent: -9999px;
+	position: relative;
+	vertical-align: middle;
+	background: #404040 url(img/player.svg);
+	background-size: 300% 100%;
+	background-position: -100% 0%;
+	@include display-inline();
+
+	.label {
+		display: none;
+	}
+
+	&:hover {
+		background-color: #202020;
+	}
+
+	&.loading {
+		background-color: #404040;
+		background-position: -150% 0%;
+	}
+
+	&.playing {
+		background-color: #202020;
+		background-position: -50% 0%;
+	}
+
+	&.error {
+		background-color: #7f0000;
+		background-position: 0% 0%;
+	}
+}
+
+/* @end */
+
 @media print {
 
 	.button {

@@ -16,13 +16,18 @@ What you can do:
 * Load multi-channel samples and play them at different pitches
 
 <p class="buttons">
+	<strong><a href="examples/" class="button">Examples</a></strong>
 	<strong><a href="manual/" class="button">Read the manual</a></strong>
 	<a href="https://github.com/detomon/BlipKit" class="button">Get the latest version</a>
 </p>
 
-## Example
+## Basic example
 
-This code demonstrates the basic steps to generate audio data of a square wave in the standard pitch A (440 Hz):
+<p class="buttons">
+	<a href="{{ "/assets/sound/square12.5.wav" | prepend: site.baseurl }}" class="player" data-volume="0.7"><span class="label">Square 12.5%</span></a>
+</p>
+
+This code demonstrates the basic steps to generate audio data of a square wave in the note *A* with enabled tremolo effect:
 
 {% highlight c %}
 // Context object
@@ -35,15 +40,20 @@ BKContextInit (& ctx, 2, 44100);
 // Track object to generate the waveform
 BKTrack track;
 
-// Initialize track with waveform BK_SQUARE
+// Initialize track with square wave
+// By default, the square wave has a duty cycle of 12.5%
 BKTrackInit (& track, BK_SQUARE);
 
-// Set mix and track volume
-BKTrackSetAttr (& track, BK_MASTER_VOLUME, 0.2 * BK_MAX_VOLUME);
+// Set mix and note volume
+BKTrackSetAttr (& track, BK_MASTER_VOLUME, 0.15 * BK_MAX_VOLUME);
 BKTrackSetAttr (& track, BK_VOLUME,        1.0 * BK_MAX_VOLUME);
 
 // Set note A in octave 3
 BKTrackSetAttr (& track, BK_NOTE, BK_A_3 * BK_FINT20_UNIT);
+
+// Enable tremolo effect
+BKInt tremolo [2] = {20, 0.66 * BK_MAX_VOLUME};
+BKTrackSetEffect (& track, BK_EFFECT_TREMOLO, tremolo, sizeof (tremolo));
 
 // Attach track to context
 BKTrackAttach (& track, & ctx);
@@ -61,6 +71,8 @@ BKContextGenerate (& ctx, frames, 512);
 // Which means that the first frame of the left channel is at frames[0],
 // the first frame of the right channel at frames[1] and so on
 {% endhighlight %}
+
+[More examples](examples/)
 
 [sdl]: http://www.libsdl.org
 [manual]: manual/

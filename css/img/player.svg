@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="300px" height="100px" viewBox="0 0 300 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<g fill="#ffffff">
+		<circle cx="30" cy="50" r="7"></circle>
+		<circle cx="50" cy="50" r="7"></circle>
+		<circle cx="70" cy="50" r="7"></circle>
+		<polygon points="137.3705 28.125 175.2590 50 137.3705 71.875"></polygon>
+		<rect x="228.125" y="28.125" width="43.75" height="43.75"></rect><!-- 7/16 -->
+	</g>
+</svg>
