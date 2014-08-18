@@ -6,14 +6,15 @@ $(function () {
 
 	var soundInstances = {};
 
-	$(".player[href]").click(function (e) {
+	$(".player .button").click(function (e) {
 		e.preventDefault();
 
 		var $this   = $(this);
+		var $parent = $this.parents(".player");
 		var href    = $this.attr("href");
-		var volume  = parseFloat($this.data("volume") || 0.5);
-		var soundid = $this.data("soundid");
-		var state   = $this.data("state") || "";
+		var volume  = parseFloat($parent.data("volume") || 0.5);
+		var soundid = $parent.data("soundid");
+		var state   = $parent.data("state") || "";
 		var instance;
 
 		if (state == "playing") {
@@ -27,28 +28,28 @@ $(function () {
 		}
 
 		function loading() {
-			$this.data("state", "loading");
-			$this.addClass("loading");
+			$parent.data("state", "loading");
+			$parent.addClass("loading");
 		}
 
 		function play() {
-			$this.data("state", "playing");
-			$this.removeClass("loading").addClass("playing");
+			$parent.data("state", "playing");
+			$parent.removeClass("loading").addClass("playing");
 		}
 
 		function complete() {
-			$this.data("state", "");
-			$this.removeClass("playing");
+			$parent.data("state", "");
+			$parent.removeClass("playing");
 		}
 
 		function error() {
-			$this.data("state", "error");
-			$this.removeClass("loading").addClass("error");
+			$parent.data("state", "error");
+			$parent.removeClass("loading").addClass("error");
 		}
 
 		if (!soundid) {
 			soundid = "sound" + (new Date()).getTime() + parseInt(Math.random() * 1000);
-			$this.data("soundid", soundid);
+			$parent.data("soundid", soundid);
 		}
 
 		if (soundInstances[soundid]) {

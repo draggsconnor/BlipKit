@@ -23,9 +23,14 @@ What you can do:
 
 ## Basic example
 
-<p class="buttons">
-	<a href="{{ "/assets/sound/square12.5.wav" | prepend: site.baseurl }}" class="player" data-volume="0.7"><span class="label">Square 12.5%</span></a>
-</p>
+<div class="buttons">
+	<div class="player" data-volume="0.7">
+		<a href="{{ "/assets/sound/square/square-12.5.mp3" | prepend: site.baseurl }}" class="button">
+			Square 12.5%
+		</a>
+		<div class="label"><a href="{{ "/assets/sound/square/square-12.5.wav" | prepend: site.baseurl }}">Square wave 12.5% (WAV)</a></div>
+	</div>
+</div>
 
 This code demonstrates the basic steps to generate audio data of a square wave in the note *A* with enabled tremolo effect:
 
