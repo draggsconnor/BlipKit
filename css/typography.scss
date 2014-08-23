@@ -17,11 +17,6 @@ html, body, button, input, textarea {
 h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 0;
 	font-weight: normal;
-
-	* + &,
-	&:first-child {
-		margin-top: 1em;
-	}
 }
 
 h1 {
@@ -53,6 +48,12 @@ p, ol, ul, blockquote, pre {
 
 pre, code, var {
 	font: $code-font;
+}
+
+strong {
+	code, var {
+		font-weight: bold;
+	}
 }
 
 dl, menu, ol, ul {
