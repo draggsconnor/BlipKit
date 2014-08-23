@@ -1,13 +1,7 @@
 ---
 layout: doc
-title: Library architecture
-order: 0
+title: Custom waveforms
+order: 30
 ---
 
-## Generating sound
-
 ...
-
-## Thready safety
-
-Function calls are *not* thread-safe by design choice, as the library is designed to be fast and simple. ... when a lock required:

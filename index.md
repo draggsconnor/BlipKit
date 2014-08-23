@@ -69,7 +69,7 @@ BKTrackAttach (& track, & ctx);
 BKFrame frames [512 * 2];
 
 // Generate 512 frames e.g. as they would be requested by an audio output function
-// Every call to this function generates the next requested number of frames
+// Subsequent calls to this function generates the next requested number of frames
 BKContextGenerate (& ctx, frames, 512);
 
 // The channels are interlaced into the buffer in the form: LRLR...
@@ -77,11 +77,5 @@ BKContextGenerate (& ctx, frames, 512);
 // the first frame of the right channel at frames[1] and so on
 {% endhighlight %}
 
-[More examples](examples/)
-
-[sdl]: http://www.libsdl.org
-[manual]: manual/
-[effect]: manual/effects/
-[instruments]: manual/instruments/
-[custom waveforms]: manual/waveforms/
-[samples]: manual/samples/
+- [Manual](manual/)
+- [More examples](examples/)
