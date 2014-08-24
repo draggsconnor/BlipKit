@@ -17,7 +17,8 @@ $footer-top-margin: 5em;
 
 $small-screen-width: #{$page-width * 0.75};
 
-$transition-time: 0.075s;
+$transition-time: 0.1s;
+$header-transition-time: 0.5s;
 
 @import 'normalize';
 @import 'mixins';

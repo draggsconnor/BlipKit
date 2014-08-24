@@ -20,17 +20,19 @@
 			display: block;
 		}
 
-		&.open {
-			ul {
-				display: block;;
-			}
+		& > ul {
+			display: none;
+			background: white;
+			position: relative;
+			@include box-shadow(0px, 2em, 4em, white);
+
 		}
 
-		& > ul {
-			padding-bottom: #{$line-height * 2};
-			@include box-shadow(0px, 2em, 4em, white);
-			background: white;
-			display: none;
+		&.open {
+			& > ul {
+				display: block;
+				padding-bottom: #{$line-height};
+			}
 		}
 	}
 

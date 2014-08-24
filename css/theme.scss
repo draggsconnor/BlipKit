@@ -29,12 +29,22 @@ a {
 	}
 }
 
+a,
+.button {
+	@each $vendor in $vendors {
+		#{$vendor}transition: color $transition-time;
+	}
+}
+
 .button {
 	color: white;
 	background: $link-color;
 	border-radius: 0.5em;
 	padding: 0.2em 0.66em;
 	@include display-inline();
+	@each $vendor in $vendors {
+		#{$vendor}transition: background-color $transition-time, color $transition-time;
+	}
 
 	&:hover {
 		color: white;
@@ -68,24 +78,20 @@ strong .button {
 	}
 }
 
-a,
-.button {
-	@each $vendor in $vendors {
-		#{$vendor}transition: color $transition-time, background-color linear $transition-time;
-	}
-}
-
-.site-title,
+.site-title a,
 .page-meta-nav .icon a {
-	@each $vendor in $vendors {
-		#{$vendor}transition: opacity linear $transition-time;
-	}
-}
+	position: relative;
 
-.site-title,
-.page-meta-nav .icon a {
+	@each $vendor in $vendors {
+		#{$vendor}backface-visibility: hidden;
+		#{$vendor}transition: opacity #{$header-transition-time / 2};
+	}
+
 	&:hover {
 		opacity: 0.94;
+		@each $vendor in $vendors {
+			#{$vendor}transition: opacity $header-transition-time;
+		}
 	}
 }
 

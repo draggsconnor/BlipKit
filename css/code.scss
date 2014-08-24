@@ -30,7 +30,7 @@ code, var {
 }
 
 
-p {
+p, dt {
 	a {
 		var, code {
 			padding: 0.1em 0.5em;
@@ -39,6 +39,13 @@ p {
 			border-radius: 0.25em;
 			text-decoration: none;
 		}
+	}
+
+	var, code {
+		padding: 0.1em 0.5em;
+		background: rgba(80, 112, 176, 0.15);
+		border-radius: 0.25em;
+		text-decoration: none;
 	}
 }
 

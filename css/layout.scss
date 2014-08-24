@@ -50,7 +50,6 @@ body {
 	height: $header-height;
 	margin-bottom: $header-height;
 	background: url(img/lines.svg) center top fixed;
-
 }
 
 .site-title {
@@ -136,6 +135,7 @@ nav {
 		top: 0;
 		right: 0;
 		position: absolute;
+		z-index: 1;
 		text-indent: -9999px;
 		@include background-resizable('img/nav.svg', 100%);
 		background-color: #c0c0c0;
