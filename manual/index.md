@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Manual
-order: 5
+order: 10
 ---
 
 [Start here](introduction/)

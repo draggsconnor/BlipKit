@@ -4,16 +4,16 @@ full_title: BlipKit
 order: 0
 ---
 
-BlipKit is a C library for creating the beautiful sound of old soundchips.
+BlipKit is a C library for creating the beautiful sound of old [soundchips](http://en.wikipedia.org/wiki/Chiptune).
 
 What you can do:
 
-* Generate waveforms: square, triangle, sawtooth, noise and custom waveforms
-* Use an unlimited number of individual tracks
-* Use stereo output or up to 8 custom channels
-* Define instruments to create envelopes and other interesting effects
-* Use effects: portamento, tremolo, vibrato and some more
-* Load multi-channel samples and play them at different pitches
+* Generate [waveforms](manual/track/): square, triangle, noise, sawtooth, sine and custom waveforms
+* Use an unlimited number of individual [tracks](manual/track/)
+* Use stereo output or up to 8 [custom channels](manual/context/)
+* Define [instruments](manual/instruments/) to create [envelopes](manual/envelopes/) and other interesting effects
+* Use [effects](manual/effects/): portamento, tremolo, vibrato and some more
+* Load multi-channel [samples](manual/samples/) and play them at different pitches
 
 <p class="buttons">
 	<strong><a href="examples/" class="button">Examples</a></strong>
@@ -77,5 +77,6 @@ BKContextGenerate (& ctx, frames, 512);
 // the first frame of the right channel at frames[1] and so on
 {% endhighlight %}
 
-- [Manual](manual/)
+- [Read manual](manual/)
 - [More examples](examples/)
+- [Download latest version](https://github.com/detomon/BlipKit)

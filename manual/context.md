@@ -27,12 +27,10 @@ This initializes a `BKContent` object with 2 channels (stereo) and a sample rate
 
 ## Attributes
 
-The context
-
-Attributes control the behaviour of a context object. The following list contains integer attributes which can be changed with with the function `BKContextSetAttr` or retrieved with the function `BKContextGetAttr`. Some attributes use a more complex data type and can be set with `BKContextSetPtr` or be retrieved with `BKContextGetPtr`
+Attributes control the behaviour of a context object. The following list contains integer attributes which can be changed with with the function `BKContextSetAttr` or retrieved with the function `BKContextGetAttr`. Some attributes use a more complex data type and can be set with `BKContextSetPtr` or be retrieved with `BKContextGetPtr`.
 
 <dl>
-<dt><var>BK_SAMPLE_RATE</var> (<var>BKInt</var>) (read-only)</dt>
+<dt><var>BK_SAMPLE_RATE</var> (<var>BKInt</var>, read-only)</dt>
 <dd>
 
 <p>The sample rate on which basis the note frequencies are calculated. This attribute is read-only and can only be set at initialization.</p>
@@ -47,7 +45,7 @@ BKContextGetAttr (& ctx, BK_SAMPLE_RATE, & sampleRate);
 {% endhighlight %}
 
 </dd>
-<dt><var>BK_NUM_CHANNELS</var> (<var>BKInt</var>) (read-only)</dt>
+<dt><var>BK_NUM_CHANNELS</var> (<var>BKInt</var>, read-only)</dt>
 <dd>
 
 <p>Number of channels in which the sound data is rendered. Attributes and track effects which affect panning have only an effect when this number is exactly 2 (stereo). This attribute is read-only and can only be set at initialization.</p>
@@ -66,7 +64,7 @@ BKContextGetAttr (& ctx, BK_NUM_CHANNELS, & numChannels);
 <dt><var>BK_CLOCK_PERIOD</var> (<var>BKTime</var>)</dt>
 <dd>
 
-<p>The master clocks's time period. This is a <a href="../clocks/">BKTime</a> struct. The default value is 1/240 seconds (240 Hz). Use this attribute if a finer time granularity is required.</p>
+<p>The master clock's time period. This is a <a href="../clocks/">BKTime</a> struct. The default value is a 1/240th second (240 Hz). Use this attribute if a finer time granularity is required.</p>
 
 {% highlight c %}
 // Make time value
@@ -80,10 +78,10 @@ BKContextGetPtr (& ctx, BK_CLOCK_PERIOD, & time);
 {% endhighlight %}
 
 </dd>
-<dt><var>BK_TIME</var> (<var>BKTime</var>)</dt>
+<dt><var>BK_TIME</var> (<var>BKTime</var>, read-only)</dt>
 <dd>
 
-<p>This is the current absolute number of frames generated since initialization or the last reset of the context. This attribute is read-only.</p>
+<p>This is the current absolute number of frames generated since initialization or the last reset of the context.</p>
 
 {% highlight c %}
 BKTime time;
@@ -101,14 +99,14 @@ BKContextGetPtr (& ctx, BK_TIME, & time);
 
 	BKInt BKContextInit (BKContext * ctx, BKInt numChannels, BKInt sampleRate)
 
-Initialize a context object with <var>numChannel</var> channels and a samplet rate of <var>sampleRate</var>. On success <var>0</var> is returned.
+Initialize a context object `ctx` with `numChannel` channels and a samplet rate of `sampleRate`. On success `0` is returned.
 
 Possible return errors:
 
-<var>BK_ALLOCATION_ERROR</var> if memory could not be allocated.
+`BK_ALLOCATION_ERROR` if memory could not be allocated.
 
 ### BKContextDispose
 
 	void BKContextDispose (BKContext * ctx)
 
-Dispose the context and free resources. Track which are still attached are detached now.
+Dispose the context and free resources. Any attached `BKTrack` or `BKClock` objects will be detached.
