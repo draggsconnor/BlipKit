@@ -50,6 +50,16 @@ pre, code, var {
 	font: $code-font;
 }
 
+em, i, cite dfn {
+	font-style: italic;
+	font-weight: normal;
+}
+
+address {
+	font-style: normal;
+	font-weight: normal;
+}
+
 strong {
 	code, var {
 		font-weight: bold;

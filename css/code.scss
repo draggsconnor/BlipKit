@@ -5,11 +5,12 @@ pre {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	font-size: 0.9em;
+    white-space: pre;
+    word-wrap: normal;
 
 	code {
 		display: block;
 		padding: $line-height;
-		white-space: pre;
 	}
 }
 
@@ -23,12 +24,13 @@ code {
 	}
 }
 
-code, var {
-	font: $code-font;
-	font-style: normal;
-	white-space: nowrap;
+p, dt {
+	code, var {
+		font: $code-font;
+		font-style: normal;
+		white-space: nowrap;
+	}
 }
-
 
 p, dt {
 	a {
