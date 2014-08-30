@@ -23,7 +23,7 @@ BKContextInit (& ctx, 2, 44100);
 BKContextDispose (& ctx);
 {% endhighlight %}
 
-This initializes a `BKContent` object with 2 channels (stereo) and a sample rate of 44100 Hz. The maximum number of channels is `BK_MAX_CHANNELS` (8). The sample rate can range between `BK_MIN_SAMPLE_RATE` (16000) and `BK_MAX_SAMPLE_RATE` (96000). Lower or highter values are clamped.
+This initializes a `BKContent` object with 2 channels (stereo) and a sample rate of 44100 Hz. The maximum number of channels is `BK_MAX_CHANNELS` (8). The sample rate can range between `BK_MIN_SAMPLE_RATE` (16000) and `BK_MAX_SAMPLE_RATE` (96000). Lower or highter values are clamped.
 
 ## Attributes
 
@@ -64,7 +64,7 @@ BKContextGetAttr (& ctx, BK_NUM_CHANNELS, & numChannels);
 <dt><var>BK_CLOCK_PERIOD</var> (<var>BKTime</var>)</dt>
 <dd>
 
-<p>The master clock's time period. This is a <a href="../clocks/">BKTime</a> struct. The default value is a 1/240th second (240 Hz). Use this attribute if a finer time granularity is required.</p>
+<p>The master clock's time period. This is a <a href="../clocks/">BKTime</a> struct. The default value is a 1/240th second (240 Hz). Use this attribute if a finer time granularity is required.</p>
 
 {% highlight c %}
 // Make time value
