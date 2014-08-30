@@ -28,7 +28,7 @@ What you can do:
 		<a href="{{ "/assets/sound/square/square-12.5.mp3" | prepend: site.baseurl }}" class="button">
 			Square 12.5%
 		</a>
-		<div class="label"><a href="{{ "/assets/sound/square/square-12.5.wav" | prepend: site.baseurl }}">Square wave 12.5% (WAV)</a></div>
+		<div class="label"><a href="{{ "/assets/sound/square/square-12.5.mp3" | prepend: site.baseurl }}">Square wave 12.5% (MP3)</a></div>
 	</div>
 </div>
 
