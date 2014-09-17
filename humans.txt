@@ -1,4 +1,4 @@
-/* TEAM */
+/* AUTHOR */
 Author: Simon Schoenenberger
 GitHub: https://github.com/detomon/
 Soundcloud: https://soundcloud.com/detomon/
