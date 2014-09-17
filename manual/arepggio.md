@@ -1,7 +1,7 @@
 ---
 layout: doc
-title: Arpeggio sequences
-order: 17
+title: Arpeggio
+order: 60
 ---
 
 TODO

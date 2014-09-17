@@ -1,7 +1,7 @@
 ---
 layout: doc
-title: Play samples
-order: 35
+title: Playing samples
+order: 70
 ---
 
 TODO

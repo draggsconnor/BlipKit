@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Custom waveforms
+title: Waveforms
 order: 30
 ---
 

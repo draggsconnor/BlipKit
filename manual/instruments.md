@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Instruments
-order: 20
+order: 50
 ---
 
 TODO
