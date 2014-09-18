@@ -20,10 +20,10 @@ $small-screen-width: #{$page-width * 0.75};
 $transition-time: 0.1s;
 $header-transition-time: 0.5s;
 
-@import 'normalize';
-@import 'mixins';
-@import 'typography';
-@import 'layout';
-@import 'theme';
-@import 'code';
-@import 'responsive';
+@import '_normalize';
+@import '_mixins';
+@import '_typography';
+@import '_layout';
+@import '_theme';
+@import '_code';
+@import '_responsive';
