@@ -34,7 +34,7 @@ body {
 .site-footer {
 	height: #{$footer-height - $footer-top-margin};
 	margin-top: $footer-top-margin;
-	background: url(img/lines.svg) center top fixed;
+	background: url(img/lines-gray.svg) center top fixed;
 
 	.wrapper {
 		max-width: $page-width;
@@ -49,7 +49,7 @@ body {
 .site-header {
 	height: $header-height;
 	margin-bottom: $header-height;
-	background: url(img/lines.svg) center top fixed;
+	background: url(img/lines-gray.svg) center top fixed;
 }
 
 .site-title {
