@@ -21,6 +21,7 @@ $transition-time: 0.1s;
 $header-transition-time: 0.5s;
 
 @import '_normalize';
+@import '_main';
 @import '_mixins';
 @import '_typography';
 @import '_layout';
