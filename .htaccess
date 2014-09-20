@@ -1,9 +1,42 @@
 # Send UTF-8 as default encoding for text files
 AddDefaultCharset UTF-8
 
-# Compress files
+# Content-Type and encoding
+AddType application/vnd.ms-fontobject eot
+AddType font/opentype                 otf
+AddType application/x-font-ttf        ttf ttc
+AddType font/x-woff                   woff
+AddType image/svg+xml                 svg svgz
+AddType image/x-icon                  ico
+AddType text/x-component              htc
+AddType audio/mp4                     m4a
+AddType video/mp4                     mp4 m4v
+AddType video/ogg                     ogg ogv
+AddType video/webm                    webm
+AddType text/plain                    blip
+AddEncoding                           gzip svgz
+
+# Compression
 <IfModule mod_deflate.c>
-	AddOutputFilter DEFLATE js css
-	AddOutputFilter DEFLATE svg ttf
-	AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
+    AddOutputFilterByType DEFLATE application/xhtml+xml application/rss+xml application/atom+xml
+    AddOutputFilterByType DEFLATE image/x-icon image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype
+</IfModule>
+
+# Cache control
+ExpiresActive On
+ExpiresByType text/css        "access plus 1 month"
+ExpiresByType text/javascript "access plus 1 month"
+ExpiresByType image/x-icon    "access plus 1 month"
+ExpiresByType image/jpeg      "access plus 1 week"
+ExpiresByType image/gif       "access plus 1 week"
+ExpiresByType image/png       "access plus 1 week"
+ExpiresByType image/svg+xml   "access plus 1 week"
+ExpiresByType text/html       "access plus 1 week"
+
+# Allow from all origins
+<IfModule mod_headers.c>
+	Header set Access-Control-Allow-Origin "*"
 </IfModule>
