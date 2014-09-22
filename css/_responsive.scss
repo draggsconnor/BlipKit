@@ -1,5 +1,11 @@
 @media only screen and (max-width: $small-screen-width) {
 
+	.site-nav {
+		ul {
+			display: none;
+		}
+	}
+
 	.page-nav {
 		top: 0;
 		left: 0;

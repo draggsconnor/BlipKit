@@ -110,6 +110,7 @@ nav {
 	width: 11em;
 	float: right;
 	position: relative;
+	z-index: 1;
 
 	& + .post {
 		margin-right: 13em;

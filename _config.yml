@@ -5,7 +5,7 @@ email: simon@monoxid.net
 description: "BlipKit is a C library for creating the beautiful sound of old soundchips. It generates various waveforms and supports effects. Instruments can be used to create envelopes. Samples can be loaded and played in different pitches."
 baseurl: "/BlipKit"
 url: "http://detomon.github.io"
-github_username:  detomon
+github_username: detomon
 
 # Build settings
 markdown: kramdown
@@ -13,3 +13,11 @@ permalink: pretty
 
 sass:
   sass_dir: css
+
+navigation:
+ - title: Download
+   url: /download/
+ - title: Manual
+   url: /manual/
+ - title: Examples
+   url: /examples/
