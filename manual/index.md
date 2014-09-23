@@ -69,19 +69,7 @@ Some few attributes are read-only. For example, the number of channels of a cont
 
 ## Dividers
 
-The context object contains a master clock which has a tick rate of 240 Hz by default. All effects and arpeggio notes are timed by this clock.
-
-To create a beat with a certain BPM the divider interval can be calculated with this formula:
-
-{% highlight c %}
-ticks_per_beat = (240 × 60) / (bpm × 4);
-{% endhighlight %}
-
-As divider intervals are integers, only certain BPM values are possible without changing the master clock tick rate. For a BPM of 150 the divider interval is exactly 24.
-
-{% highlight c %}
-bpm = (240 × 60) / (ticks_per_beat × 4)
-{% endhighlight %}
+The context object contains a master clock which has a tick rate of 240 Hz by default. All effects and arpeggio notes are timed by this clock. [BKDivider](clocks/) objects can be attached to the clock and call a provided callback in a certain interval.
 
 {% highlight c %}
 // Divider object
@@ -94,18 +82,36 @@ BKDividerCallback callback;
 callback.func     = dividerCallback;
 callback.userInfo = NULL;
 
-// Initialize divider object with a value of 120
-// The callback is called every 120th tick of the master clock
-BKDividerInit (& divider, 120, & callback);
+// Initialize divider object with a value of 60
+// The callback is called every 60th tick of the master clock
+BKDividerInit (& divider, 60, & callback);
 
 // Attach the divider to the context's master clock
-// When frames are generated the callback is called at the defined interval
+// When frames are generated the callback is called at the defined interval points
 BKContextAttachDivider (& ctx, & divider, BK_CLOCK_TYPE_BEAT);
 {% endhighlight %}
+
+The callback function receives two arguments. The first one contains general informations about the event. The second one contains a user defined pointer. The function should always return 0 as there are no other values defined at the moment.
 
 {% highlight c %}
 BKEnum dividerCallback (BKCallbackInfo * info, void * userInfo)
 {
+	// Update track attributes ...
+
 	return 0;
 }
 {% endhighlight %}
+
+<!--
+To create a beat with a certain BPM the divider interval can be calculated with this formula:
+
+{% highlight c %}
+ticks_per_beat = (240 × 60) / (bpm × 4);
+{% endhighlight %}
+
+As divider intervals are integers, only certain BPM values are possible without changing the master clock tick rate. For a BPM of 150 the divider interval is exactly 24.
+
+{% highlight c %}
+bpm = (240 × 60) / (ticks_per_beat × 4)
+{% endhighlight %}
+-->
