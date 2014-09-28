@@ -91,4 +91,11 @@ $(function () {
 		$(this).html(html);
 	});
 
+	$("a[href*='#']").click(function () {
+		var href = $(this).attr("href");
+		if (href.substring(0, 1) == "#")
+			href = window.location.pathname + href;
+		ga('send', 'pageview', href);
+	});
+
 });
