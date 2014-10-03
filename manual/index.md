@@ -4,15 +4,20 @@ title: Manual
 order: 10
 ---
 
+<!--- [Introduction](#introduction)-->
 - [Context object](#context-object)
 - [Track objects](#track-objects)
 - [Generating audio data](#generating-audio-data)
 - [Attributes](#attributes)
 - [Dividers](#dividers)
 
+<!--## Introduction-->
+
+
+
 ## Context object
 
-[BKContext](context/) is the base object and controls the audio rendering. The number of required channels is defined at initialization (e.g. 2 for stereo). The sample rate should match that one which is used to output the audio, otherwise speed and pitch will not match.
+[BKContext](context/) is the base object. The number of required channels is defined at initialization (e.g. 2 for stereo). The sample rate should match that one which is used to output the audio, otherwise speed and pitch will not match.
 
 {% highlight c %}
 BKContext ctx;
@@ -33,7 +38,7 @@ BKTrack track;
 BKTrackInit (& track, BK_SQUARE);
 {% endhighlight %}
 
-In order to include a track into the rendering process, it has to be attached to a context. Each context may have an arbitrary number of tracks attached to it.
+In order to include a track into the rendering chain, it has to be attached to a context. Each context may have an arbitrary number of tracks attached to it.
 
 {% highlight c %}
 // Attach track to context
@@ -69,7 +74,7 @@ Some few attributes are read-only. For example, the number of channels of a cont
 
 ## Dividers
 
-The context object contains a master clock which has a tick rate of 240 Hz by default. All effects and arpeggio notes are timed by this clock. [BKDivider](clocks/) objects can be attached to the clock and call a provided callback in a certain interval.
+The context object contains a master clock which has a tick rate of 240 Hz. All effects and arpeggio notes are timed by this clock. [BKDivider](clocks/) objects can be attached to the clock and call a provided callback in a certain interval.
 
 {% highlight c %}
 // Divider object
