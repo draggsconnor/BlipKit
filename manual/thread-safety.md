@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Thread safety
+title: Thread Safety
 order: 110
 ---
 

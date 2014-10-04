@@ -9,7 +9,7 @@ order: 10
 - [Track objects](#track-objects)
 - [Generating audio data](#generating-audio-data)
 - [Attributes](#attributes)
-- [Dividers](#dividers)
+- [Creating a beat](#creating-a-beat)
 
 <!--## Introduction-->
 
@@ -72,9 +72,9 @@ The behaviour of objects, including tracks, is controlled by *attributes*. Attri
 
 Some few attributes are read-only. For example, the number of channels of a context. All writable attributes can be changed even while the generator functions are running. For this purpose, [BKDivider](clocks/) objects are used.
 
-## Dividers
+## Creating a beat
 
-The context object contains a master clock which has a tick rate of 240 Hz. All effects and arpeggio notes are timed by this clock. [BKDivider](clocks/) objects can be attached to the clock and call a provided callback in a certain interval.
+The context object contains a master clock which has a tick rate of 240 Hz. All [effects](effects/) and [arpeggio notes](arepggio/) are timed by this clock. [BKDivider](clocks-and-dividers/) objects can be attached to the clock which then call provided callbacks in certain intervals.
 
 {% highlight c %}
 // Divider object

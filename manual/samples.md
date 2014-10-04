@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Playing samples
+title: Playing Samples
 order: 70
 ---
 

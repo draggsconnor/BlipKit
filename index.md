@@ -6,8 +6,6 @@ order: 0
 
 BlipKit is a C library for creating the beautiful sound of old [soundchips](http://en.wikipedia.org/wiki/Chiptune).
 
-What you can do:
-
 * Generate [waveforms](manual/waveforms/): square, triangle, noise, sawtooth, sine and custom waveforms
 * Use an unlimited number of individual [tracks](manual/tracks/)
 * Use stereo output or up to 8 [custom channels](manual/context/)
@@ -17,7 +15,7 @@ What you can do:
 
 <p class="buttons">
 	<strong><a href="examples/" class="button">Examples</a></strong>
-	<strong><a href="manual/" class="button">Read the manual</a></strong>
+	<strong><a href="manual/" class="button">Read manual</a></strong>
 	<a href="https://github.com/detomon/BlipKit" class="button">Get the latest version</a>
 </p>
 
@@ -25,10 +23,10 @@ What you can do:
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
-		<a href="{{ "/assets/sound/basic-example/basic-example.mp3" | prepend: site.baseurl }}" class="button">
-			Square 12.5%
+		<a href="{{ "/assets/sound/basic/square-wave-with-tremolo.mp3" | prepend: site.baseurl }}" class="button">
+			Square Wave with Tremolo
 		</a>
-		<div class="label"><a href="{{ "/assets/sound/basic-example/basic-example.mp3" | prepend: site.baseurl }}">Square wave (MP3)</a></div>
+		<div class="label"><a href="{{ "/assets/sound/basic/square-wave-with-tremolo.mp3" | prepend: site.baseurl }}">Square Wave with Tremolo</a></div>
 	</div>
 </div>
 

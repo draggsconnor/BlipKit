@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: BKContext object
+title: BKContext Object
 order: 100
 ---
 

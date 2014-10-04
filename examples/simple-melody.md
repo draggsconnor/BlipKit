@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Simple melody
+title: Simple Melody
 order: 5
 ---
 
