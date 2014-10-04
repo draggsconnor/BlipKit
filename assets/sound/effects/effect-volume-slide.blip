@@ -1,0 +1,13 @@
+stepticks:20;
+
+track:begin:square;
+
+	v:255;
+	e:vs:120;
+	a:g2;
+	v:32;
+	s:16;r;
+	s:1;
+	z;
+
+track:end;

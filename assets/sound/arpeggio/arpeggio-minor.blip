@@ -1,0 +1,9 @@
+stepticks:20;
+
+track:begin:square;
+
+	a:c4:g3:d#4;s:32;r;
+	s:1;
+	z;
+
+track:end;
