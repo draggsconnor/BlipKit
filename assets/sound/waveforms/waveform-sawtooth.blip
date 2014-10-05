@@ -1,0 +1,9 @@
+stepticks:24;
+
+track:begin:sawtooth;
+
+	a:c3;s:16;r;s:1;
+	s:1;
+	z;
+
+track:end;

@@ -1,0 +1,16 @@
+stepticks:30;
+
+track:begin:triangle;
+
+	rt:40;a:c1;s:2;r;
+	rt:12;a:c2;s:1;r;
+	rt:12;a:c2;s:1;r;
+	rt:40;a:c1;s:2;r;
+	rt:12;a:c2;s:1;r;
+	rt:12;a:c2;s:1;r;
+	e:pr:60;a:c1;a:g1;s:2;
+	e:pr:30;a:c0;s:2;r;
+	s:1;
+	z;
+
+track:end;

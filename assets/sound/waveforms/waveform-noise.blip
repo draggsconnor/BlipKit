@@ -1,0 +1,13 @@
+stepticks:24;
+
+track:begin:noise;
+
+	v:127;
+	a:c2;s:8;r;
+	a:c4;s:8;r;
+	a:c8;s:8;r;
+	a:c0;s:8;r;
+	s:1;
+	z;
+
+track:end;
