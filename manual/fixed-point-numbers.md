@@ -6,11 +6,13 @@ order: 80
 
 Fixed-point numbers are used to represent floating point numbers in form of integers. They have some advantages in certain situations. However, the downside is that they are limited to a certain value range.
 
-This library defines a type `BKFUInt20` and its signed variant `BKFInt20` to declare fixed-point numbers. This is a 32 bit integer which has the integer part in the upper 12 bits and the fractional part in the lower 20 bits. Its absolute integer value is 4095 for the unsigned version and 2047 for the signed one which.
+This library defines a type `BKFUInt20` and its signed variant `BKFInt20` to declare fixed-point numbers. This is a 32 bit integer which has the integer part in the upper 12 bits and the fractional part in the lower 20 bits. Its absolute integer value is 4095 for the unsigned version and 2047 for the signed one.
 
 {% highlight text %}
++-------------------------------------------------+
+|                 32 bit integer                  |
 +------------------+------------------------------+
-| int part 12 bits |      frac part 20 bits       |
+| int part 12 bits |   fractional part 20 bits    |
 +------------------+------------------------------+
 {% endhighlight %}
 

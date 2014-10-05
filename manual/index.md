@@ -4,16 +4,9 @@ title: Manual
 order: 10
 ---
 
-<!--- [Introduction](#introduction)-->
-- [Context object](#context-object)
-- [Track objects](#track-objects)
-- [Generating audio data](#generating-audio-data)
-- [Attributes](#attributes)
-- [Creating a beat](#creating-a-beat)
+This is an overview of the library concept and its basic objects. One special thing to mention is that all object variables are declared statically. Memory allocations are reduced to a minimum this way.
 
-<!--## Introduction-->
-
-
+*Although the objects in the example code snippets are declared in a function-like context, it should be remembered to declare them globally or wrapped inside another object so they exist further when a function returns.*
 
 ## Context object
 
@@ -29,7 +22,7 @@ BKContextInit (& ctx, 2, 44100);
 
 ## Track objects
 
-[BKTrack](tracks/) objects render the audio data. This may be a [waveform](waveforms/) or a [sample](samples/). A waveform type has to be given at initialization, which can be changed afterwards, though. Each track generates it own layer of sound data and doesn't interfere with other tracks.
+[BKTrack](tracks/) objects render the audio data. This may be a [waveform](waveforms/) or a [sample](samples/). A waveform type has to be given at initialization which can be changed afterwards, though. Each track generates it own layer of sound data and doesn't interfere with other tracks.
 
 {% highlight c %}
 BKTrack track;
@@ -96,11 +89,13 @@ BKDividerInit (& divider, 60, & callback);
 BKContextAttachDivider (& ctx, & divider, BK_CLOCK_TYPE_BEAT);
 {% endhighlight %}
 
-The callback function receives two arguments. The first one contains general informations about the event. The second one contains a user defined pointer. The function should always return 0 as there are no other values defined at the moment.
+The callback function receives two arguments. The first one contains the `BKDivider` object and information about the event. The second one is the user defined pointer given at initialization. The function should always return 0 as there are no other values defined at the moment.
 
 {% highlight c %}
 BKEnum dividerCallback (BKCallbackInfo * info, void * userInfo)
 {
+	BKDivider * divider = info -> object;
+
 	// Update track attributes ...
 
 	return 0;

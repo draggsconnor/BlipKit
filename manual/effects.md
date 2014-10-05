@@ -4,7 +4,7 @@ title: Effects
 order: 40
 ---
 
-Effects are used to "animate" certain track attributes. Like other attributes, effects can be set with the attribute setter and getter functions. For effects with multiple arguments there are also special functions: `BKTrackSetEffect` is used for setting effects and `BKTrackGetEffect` for reading effect values.
+Effects are used to "animate" certain track attributes. Single argument effects can be set with the normal attribute setter and getter functions. For effects with multiple arguments there are special functions: `BKTrackSetEffect` is used for setting effects and `BKTrackGetEffect` for reading effect values.
 
 ## Volume slide
 
@@ -152,7 +152,7 @@ First, the tremolo effect is set immediately without sliding (`tremolo1`). Then 
 
 ## Vibrato
 
-`BK_EFFECT_VIBRATO` raises and lowers the note pitch relatively to the current note by the given number of halftones repeatedly in the given number of ticks.
+`BK_EFFECT_VIBRATO` raises and lowers the pitch relatively to the current note by the given number of halftones repeatedly in the given number of ticks.
 
 One vibrato cycle consist of 4 phases. In the first phase the pitch is raised by the given amount. In the second phase the pitch is lowered to 0 again. The next two phases are the mirrowed variant of the first two, in which the pitch is first lowered by the given amount and the raised up to 0 again.
 
