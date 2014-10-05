@@ -15,9 +15,9 @@ sass:
   sass_dir: css
 
 navigation:
- - title: Download
-   url: /download/
  - title: Manual
    url: /manual/
  - title: Examples
    url: /examples/
+ - title: Download
+   url: /download/
