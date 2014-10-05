@@ -62,7 +62,7 @@ strong .button {
 }
 
 .buttons {
-	padding: $line-height;
+	padding: 1em;
 	background: url(img/lines-gray.svg) center top fixed;
 
 	* + & {
@@ -137,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
 /* @group Sound */
 
 .player {
-	margin: 0 0.5em;
+	margin: 0.5em;
 	vertical-align: middle;
 	@include display-inline();
 
