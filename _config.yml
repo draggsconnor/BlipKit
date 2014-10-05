@@ -1,6 +1,6 @@
 # Site settings
 title: BlipKit Soundchip Library
-short_title: BlipKit
+short_title: BlipKit Library
 email: simon@monoxid.net
 description: "BlipKit is a C library for creating the beautiful sound of old soundchips. It generates various waveforms and supports effects. Instruments can be used to create envelopes. Samples can be loaded and played in different pitches."
 baseurl: "/BlipKit"
