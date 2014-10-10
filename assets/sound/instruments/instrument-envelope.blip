@@ -1,0 +1,18 @@
+stepticks:30;
+
+instr:begin;
+	vnv:2:2:10:255:20:127:4:150:25:20:15:255:30:0;
+	anv:2:1:0:-1200:24:0:12:30:40:-60;
+instr:end;
+
+track:begin:square;
+
+	e:pr:48;
+	i:0;
+	a:c2;s:4;r;s:4;
+	a:c3;s:4;r;s:4;
+	a:d3;s:4;r;s:4;
+	a:a#2;s:4;r;s:4;
+	z;
+
+track:end;
