@@ -78,6 +78,18 @@ strong .button {
 	}
 }
 
+.site-nav {
+	a:hover {
+		color: black;
+	}
+
+	li {
+		&.current a {
+			color: black;
+		}
+	}
+}
+
 .site-title a,
 .page-meta-nav .icon a {
 	position: relative;
