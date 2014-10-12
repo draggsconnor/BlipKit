@@ -4,6 +4,6 @@ title: Thread Safety
 order: 110
 ---
 
-Function calls are *not* thread-safe by design choice. In some situations, function calls require a lock. Which is the case when the libary is controlled by different threads. Assuming that the audio is generated in its own working thread (*generator thread*) provided by an audio framework (e.g. [SDL](https://www.libsdl.org)), but the track objects are controlled by the main thread (*controlling thread*), would require a lock which wraps the library function calls.
+Function calls are *not* thread-safe as a design choice. In some situations, function calls require a lock, which is the case when the same objects are used in different threads. Assuming that the audio data is generated in its own thread provided by an audio framework (e.g. [SDL](https://www.libsdl.org)) and the objects are controlled by the main thread; this would require a lock that wraps the library function calls.
 
- In case of SDL, which provides lock functions for this purpose, library function calls in the controlling thread have to be wrapped between `SDL_LockAudioDevice` and `SDL_UnlockAudioDevice` calls.
+ In case of SDL, which provides lock functions for this purpose, library function calls in the main thread should be wrapped between `SDL_LockAudioDevice` and `SDL_UnlockAudioDevice`.

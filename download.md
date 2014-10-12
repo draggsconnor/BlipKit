@@ -9,7 +9,7 @@ order: 3
 
 [https://github.com/detomon/BlipKit](https://github.com/detomon/BlipKit)
 
-##Building the library
+##Building the Library
 
 First execute `autogen.sh` in the base directory to generate the build system:
 
@@ -28,7 +28,7 @@ and headers on your system:
 
 	blipkit$ sudo make install
 
-## Building and running examples
+## Building and Running Examples
 
 All examples use SDL (<http://www.libsdl.org>) to output sound, so you have to
 install it first. Execute `make examplename` to build an example in the

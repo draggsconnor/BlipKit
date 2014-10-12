@@ -4,7 +4,9 @@ title: Instruments
 order: 50
 ---
 
-Instruments create envelopes over certain track attributes when a note is playing. Each envelope has thee phases: an *attack phase* which is played when the note is set, a *sustain phase* which is repeated after the attack phase has finished and as long as the note is set, and a *release phase* which will be played when the note is released.
+Instruments create envelopes over certain track attributes. An envelope changes its corresponding track attribute stepwise relatively to the current attribute value while the note is playing. (An exception is the *duty cycle* envelope, which sets absolute values).
+
+Each envelope has 3 *phases*, where each phase has a certain number of *steps*. The *attack phase* is played when the note is set, the *sustain phase* is played after the attack phase and repeated while the note is set, and the *release phase* is be played when the note is released.
 
 {% highlight text %}
 +--------+-----------------+---------+
@@ -12,11 +14,21 @@ Instruments create envelopes over certain track attributes when a note is playin
 +--------+-----------------+---------+
 {% endhighlight %}
 
-The attack phase is only triggered when the note was not set before, so changing the note without releasing it first will not trigger the attack phase again. Instead, the sustain phase keeps repeating. The note, [arpeggio sequences](../arpeggio/) and all [effects](../effects/) will continue playing until each release phase of each envelope has finished.
+The attack phase is only triggered the first time the note is set, so changing the note without releasing it first will not trigger the attack phase again. Instead the sustain phase keeps repeating and a possibly set [portamento effect](../effects/#portamento-note-slide) can be used.
 
-Not all phases have to be defined, here are some meaningful combinations:
+The note, [arpeggio notes](../arpeggio/) and all [effects](../effects/) will continue playing until all release phases of each envelope are finished. If an envelope has no release phase or is shorter than others in the same instrument, its last value is kept until all envelopes are finished.
 
-All phases: the behaviour is like in the description above.
+- [Envelope Phases](#envelope-phases)
+- [Setting Envelopes](#setting-envelopes)
+- [Step Size](#step-size)
+- [Extended Envelopes](#extended-envelopes)
+- [ADSR Envelopes](#adsr-envelopes)
+
+## Envelope Phases
+
+What follows are combinations of envelope phases and their behaviour:
+
+**All phases:** the attack phase is played, after that the sustain phase is repeated. The release phase is played when unsetting the note.
 
 {% highlight text %}
 +--------+-----------------+---------+
@@ -24,7 +36,7 @@ All phases: the behaviour is like in the description above.
 +--------+-----------------+---------+
 {% endhighlight %}
 
-No attack phase: the sustain phase is repeated right after a note is set.
+**No attack phase**: the sustain phase is repeated right after a note is set. The release phase is played when unsetting the note
 
 {% highlight text %}
 +-----------------+---------+
@@ -32,7 +44,7 @@ No attack phase: the sustain phase is repeated right after a note is set.
 +-----------------+---------+
 {% endhighlight %}
 
-No release phase: the note will stop immediately after its release.
+**No release phase:** the attack phase is played, after that the sustain phase is repeated. The note will be muted immediately after its release.
 
 {% highlight text %}
 +--------+-----------------+
@@ -40,7 +52,7 @@ No release phase: the note will stop immediately after its release.
 +--------+-----------------+
 {% endhighlight %}
 
-Sustain phase only: the sustain phase is repeated right after a note is set and stops immediately after its release.
+**Sustain phase only:** the sustain phase is repeated right after a note is set and will mute it immediately after its release.
 
 {% highlight text %}
 +-----------------+
@@ -48,7 +60,7 @@ Sustain phase only: the sustain phase is repeated right after a note is set and 
 +-----------------+
 {% endhighlight %}
 
-Attack phase only: the attack phase is played first then its last value is hold as long as the note is set.
+**Attack phase only:** the attack phase is played first then its last value is kept as long as the note is set.
 
 {% highlight text %}
 +--------+
@@ -56,18 +68,30 @@ Attack phase only: the attack phase is played first then its last value is hold 
 +--------+
 {% endhighlight %}
 
-An envelope (further also called *sequence*) is simply an arrays of integers (*steps*) whose value ranges are dependant of the envelope type. The phase lengths are defined by the start and length of the sustain phase.
+## Setting Envelopes
+
+An envelope is simply an arrays of integers (*steps*) whose value ranges depend on the envelope type. The phase lengths are defined by the start and length of the *sustain phase*.
 
 {% highlight c %}
 BKInt volume [12] = {
-	0.25 * BK_MAX_VOLUME, 0.5 * BK_MAX_VOLUME, 0.75 * BK_MAX_VOLUME, 1.0 * BK_MAX_VOLUME,
-	1.0 * BK_MAX_VOLUME, 0.7 * BK_MAX_VOLUME, 0.5 * BK_MAX_VOLUME,
-	0.8 * BK_MAX_VOLUME, 0.6 * BK_MAX_VOLUME, 0.4 * BK_MAX_VOLUME, 0.2 * BK_MAX_VOLUME, 0,
+	// attack
+	0.25 * BK_MAX_VOLUME, 0.5 * BK_MAX_VOLUME,
+	0.75 * BK_MAX_VOLUME, 1.0 * BK_MAX_VOLUME,
+	// sustain
+	1.0 * BK_MAX_VOLUME, 0.7 * BK_MAX_VOLUME,
+	0.5 * BK_MAX_VOLUME,
+	// release
+	0.8 * BK_MAX_VOLUME, 0.6 * BK_MAX_VOLUME,
+	0.4 * BK_MAX_VOLUME, 0.2 * BK_MAX_VOLUME,
+	0,
 };
 
 BKInt pitch [4] = {
+	// attack
 	12 * BK_FINT20_UNIT, 12 * BK_FINT20_UNIT,
+	// sustain
 	0,
+	// release
 	-12 * BK_FINT20_UNIT,
 };
 
@@ -87,7 +111,7 @@ BKInstrumentSetSequence (& instrument, BK_SEQUENCE_PITCH, pitch, 4, 2, 1);
 BKTrackSetPtr (& track, BK_INSTRUMENT, & instrument);
 {% endhighlight %}
 
-This initializes an instrument object with a volume and pitch sequence and sets it as track instrument. Instruments can be set to multiple tracks, and sequences can even be updated when an instrument is set to a track. `BKInstrumentSetSequence` sets or updates the values for the specified sequence type.
+This initializes an instrument object with a volume and pitch envelope and sets it to a track. Instruments can be set to multiple tracks, and envelopes can even be updated while the instrument is set to a track. `BKInstrumentSetSequence` sets or updates these values for the specified envelope.
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -97,16 +121,16 @@ This initializes an instrument object with a volume and pitch sequence and sets 
 		<div class="label"><a href="{{ "/assets/sound/effects/instrument-volume.mp3" | prepend: site.baseurl }}">Volume Envelope</a></div>
 	</div>
 	<div class="player" data-volume="0.7">
-		<a href="{{ "/assets/sound/instruments/instrument-arpeggio.mp3" | prepend: site.baseurl }}" class="button">
-			Arpeggio Envelope
+		<a href="{{ "/assets/sound/instruments/instrument-pitch.mp3" | prepend: site.baseurl }}" class="button">
+			Pitch Envelope
 		</a>
-		<div class="label"><a href="{{ "/assets/sound/effects/instrument-arpeggio.mp3" | prepend: site.baseurl }}">Arpeggio Envelope</a></div>
+		<div class="label"><a href="{{ "/assets/sound/effects/instrument-pitch.mp3" | prepend: site.baseurl }}">Pitch Envelope</a></div>
 	</div>
 	<div class="player" data-volume="0.7">
-		<a href="{{ "/assets/sound/instruments/instrument-volume-arpeggio.mp3" | prepend: site.baseurl }}" class="button">
-			Volume and Arpeggio Envelope
+		<a href="{{ "/assets/sound/instruments/instrument-volume-pitch.mp3" | prepend: site.baseurl }}" class="button">
+			Volume and Pitch Envelope
 		</a>
-		<div class="label"><a href="{{ "/assets/sound/effects/instrument-volume-arpeggio.mp3" | prepend: site.baseurl }}">Volume and Arpeggio Envelope</a></div>
+		<div class="label"><a href="{{ "/assets/sound/effects/instrument-volume-pitch.mp3" | prepend: site.baseurl }}">Volume and Pitch Envelope</a></div>
 	</div>
 </div>
 
@@ -121,52 +145,58 @@ BKInt BKInstrumentSetSequence (
 )
 {% endhighlight %}
 
-The sequence phases are defined with the last 3 arguments of `BKInstrumentSetSequence`. `length` defines the number of values of the complete sequence. `sustainOffset` defines the start offset at which the sustain phase begins and `sustainLength` its length. The part after `sustainOffset` + `sustainLength` is the release part. It is allowed to have no length, which simply means that the sequence has no release phase. When the sustain phase has no length and its offset is equal to the length, the sequence has only an attack phase. Of course, the sustain phase can also cover the whole sequence and repeat it.
+The offsets are defined with the last 3 arguments of `BKInstrumentSetSequence`. `length` defines the number of steps of the complete envelope. `sustainOffset` defines the start offset at which the *sustain phase* begins and `sustainLength` its length. The part after `sustainOffset` + `sustainLength` is the *release phase*. It is allowed to have no length, which simply means that the envelope has none. When the *sustain phase* has no length and its offset is equal to the length, the envelope has only an *attack phase*.
 
-The following sequence types are defined:
+The following envelope types are defined:
 
 <dl>
 	<dt><var>BK_SEQUENCE_VOLUME</var></dt>
-	<dd>Volume sequence. Multiplies the volume by its current value.</dd>
+	<dd>Volume envelope. Multiplies the volume by its current value.</dd>
 	<dt><var>BK_SEQUENCE_PANNING</var></dt>
-	<dd>Panning sequence. Sets the panning of the track relative to its current value.</dd>
+	<dd>Panning envelope. Sets the panning relative to its current value.</dd>
 	<dt><var>BK_SEQUENCE_PITCH</var></dt>
-	<dd>Arpggio sequence. Sets the pitch of the note relative to its current value.</dd>
+	<dd>Arpeggio envelope. Sets the note pitch relative to its current value.</dd>
 	<dt><var>BK_SEQUENCE_DUTY_CYCLE</var></dt>
-	<dd>Duty cycle sequence. Sets the duty cycle of the square wave, whereas it has no effect on other waveforms. Values of 0 do not change the current duty cycle.</dd>
+	<dd>Duty cycle envelope. Sets the square wave's duty cycle, whereas it has no effect on other waveforms. Values of 0 do not change the current duty cycle, which allows to change it only at specific parts of the envelope.</dd>
 </dl>
 
 [Examples]
 
-## Speed
+## Step Size
 
-Each sequence step is played for 4 ticks by default. This can be changed with the attribute `BK_INSTRUMENT_DIVIDER`:
+Each envelope step is played for 4 ticks by default. This can be changed with the attribute `BK_INSTRUMENT_DIVIDER`:
 
 {% highlight c %}
-// Every step is now played for 8 ticks
+// Each step is now played for 8 ticks
 BKTrackSetAttr (& track, BK_INSTRUMENT_DIVIDER, 8);
 {% endhighlight %}
 
-## Extended envelopes
+## Extended Envelopes
 
-There is another type of envelope which has a variable step size and whose values are interpolated between the steps. It is not affected by the `BK_INSTRUMENT_DIVIDER` attribute.
+There is another type of envelope which has a variable step size and whose values are interpolated between the steps. Instead of single integer values, this envelopes consist of `BKSequencePhase` structs which have a *step* and *value* field. The *step* field defines the number of [ticks](../clocks-and-dividers/) in which the track attribute should slide to the next *value*. `BKInstrumentSetEnvelope` is used to set these envelopes.
+
+`BK_INSTRUMENT_DIVIDER` has no effect on this envelope type.
 
 {% highlight c %}
-BKSequencePhase volume [] = {
+BKSequencePhase volume [6] = {
+	// attack
 	{10, 1 * BK_MAX_VOLUME},
 	{20, 0.5 * BK_MAX_VOLUME},
+	// sustain
 	{4,  0.6 * BK_MAX_VOLUME},
 	{25, 0.01 * BK_FINT20_UNIT},
+	// release
 	{15, 1 * BK_MAX_VOLUME},
 	{30, 0},
 };
 
-BKSequencePhase pitch [] = {
+BKSequencePhase pitch [4] = {
+	// attack
 	{0, -12 * BK_FINT20_UNIT},
 	{24, 0},
-	{12, -0.3 * BK_FINT20_UNIT},
+	// sustain
 	{12, 0.3 * BK_FINT20_UNIT},
-	{30, 0},
+	// release
 	{40, -0.6 * BK_FINT20_UNIT},
 };
 
@@ -184,4 +214,29 @@ BKInt BKInstrumentSetEnvelope (
 	BKInt                   sustainOffset,
 	BKInt                   sustainLength
 )
+{% endhighlight %}
+
+## ADSR Envelopes
+
+...
+
+{% highlight c %}
+BKInt BKInstrumentSetEnvelopeADSR (
+	BKInstrument * instr,
+	BKUInt         attack,
+	BKUInt         decay,
+	BKInt          sustain,
+	BKUInt         release
+)
+{% endhighlight %}
+
+...
+
+{% highlight c %}
+BKSequencePhase volume [4] = {
+	{attack, BK_MAX_VOLUME},
+	{decay, sustain},
+	{240, sustain},
+	{release, 0},
+};
 {% endhighlight %}

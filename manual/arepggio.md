@@ -4,9 +4,10 @@ title: Arpeggio Notes
 order: 60
 ---
 
-Arpeggio is used to play multiple notes repeatedly after each other. They are only played for a short time, which gives the feeling of multiple notes playing at the same time. This makes it a good way to play chords for example, as the notes are played relatively to the note played by the track.
+- [Note Length](#note-length)
+- [Pitch Shifting](#pitch-shifting)
 
-Arpeggio notes can be used independently of [instrument](../instruments) arpeggio sequences.
+Arpeggio notes are used to play multiple notes fast and repeatedly after each other. As they are only played for a short time, this gives the impression of multiple notes playing at the same time. This makes it a good way to play chords for example, as the notes are played relatively to the track note. They can be used independently of [pitch envelopes](../instruments).
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -23,26 +24,11 @@ BKInt arpeggio [4] = {3, 0, -5 * BK_FINT20_UNIT, 3 * BK_FINT20_UNIT};
 BKTrackSetPtr (& track, BK_ARPGGIO, arpeggio);
 {% endhighlight %}
 
-This defines an array with 3 arpeggio notes in which the first element defines the number of notes. The first note is the base note itself (0 halftones away from the track note), the second is 5 halftones below and the third is 3 haltones above the base note. The note values are [fixed-point numbers](../fixed-point-numbers/) which makes it possible to defined fractional notes.
+This defines an array with 3 arpeggio notes in which the first element defines the number of notes. The first note is the base note itself (0 halftones away from the track note), the second is 5 halftones below and the third is 3 haltones above the base note. The note values are [fixed-point numbers](../fixed-point-numbers/) which makes it possible to define fractional notes.
 
-{% highlight c %}
-BKInt arpeggio [5] = {4, 0, -0.5 * BK_FINT20_UNIT, -1.0 * BK_FINT20_UNIT, -1.5 * BK_FINT20_UNIT};
+Arpeggio notes are disabled with a NULL pointer or by setting the number of notes to 0.
 
-BKTrackSetPtr (& track, BK_ARPGGIO, arpeggio);
-{% endhighlight %}
-
-<div class="buttons">
-	<div class="player" data-volume="0.7">
-		<a href="{{ "/assets/sound/arpeggio/arpeggio-pitch.mp3" | prepend: site.baseurl }}" class="button">
-			Arpeggio Pitch
-		</a>
-		<div class="label"><a href="{{ "/assets/sound/arpeggio/arpeggio-pitch.mp3" | prepend: site.baseurl }}">Arpeggio Pitch</a></div>
-	</div>
-</div>
-
-Arpeggio is disabled with NULL or by setting the number of notes to 0.
-
-## Speed
+## Note Length
 
 Each note is played for 4 ticks by default. This can be changed with the attribute `BK_ARPEGGIO_DIVIDER`. This plays each note for 12 ticks:
 
@@ -59,9 +45,9 @@ BKTrackSetAttr (& track, BK_ARPEGGIO_DIVIDER, 12);
 	</div>
 </div>
 
-## Pitch shifting
+## Pitch Shifting
 
-Arpeggio notes can be used to make a pitch shift. For example, using only a single note with the value `-12 * BK_FINT20_UNIT` would lower the track's pitch by 1 octave.
+Arpeggio notes can be used to make a pitch shift for the whole track. For example, using only a single note with the value `-12 * BK_FINT20_UNIT` would lower the track's pitch by 1 octave.
 
 {% highlight c %}
 BKInt arpeggio [2] = {1, -12 * BK_FINT20_UNIT};

@@ -4,23 +4,30 @@ title: Waveforms
 order: 30
 ---
 
-Waveforms consist of a certain number of *phases*. Each phase is a value in the range from `-BK_MAX_VOLUME` to `+BK_MAX_VOLUME`. When playing a note, the waveform and with it its phases are scaled, so that the note is in the right pitch. Tracks have some predefined waveforms which are typical for old soundchips.
+Waveforms consist of a certain number of *phases* (amplitude steps). Each phase is a value in the range from `-BK_MAX_VOLUME` to `+BK_MAX_VOLUME`. When playing a note, the waveform and with it its phases are scaled so that they are in the correct pitch. Tracks have predefined waveforms which are typical for old sound chips.
 
-## Square
+- [Square Wave](#square-wave)
+- [Triangle Wave](#triangle-wave)
+- [Noise](#noise)
+- [Sawtooth Wave](#sawtooth-wave)
+- [Sine Wave](#sine-wave)
+- [Custom Waveforms](#custom-waveforms)
 
-`BK_SQUARE` has 16 phases. The duty cycle attribute `BK_DUTY_CYCLE` defines the length of the wave peak. By default, this value is 4, which accords to a duty cycle of 25%. The value can range between 1 and 15:
+## Square Wave
+
+`BK_SQUARE` has 16 phases. The duty cycle attribute `BK_DUTY_CYCLE` defines the length of the wave peak. This value is 4 by default, which accords to a duty cycle of 25%. The value can range from 1 to 15:
 
 {% highlight text %}
     +-----+
-    |12.5%|
+    |12.5%|  duty cycle: 2
 0 - +     +-----------------------------------------+
 
     +-----------+
-    |    25%    |
+    |    25%    |  duty cycle: 4
 0 - +           +-----------------------------------+
 
     +-----------------------+
-    |         50%           |
+    |         50%           |  duty cycle: 8
 0 - +                       +-----------------------+
 
     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -56,29 +63,29 @@ BKTrackSetAttr (& track, BK_DUTY_CYCLE, 8);
 	</div>
 </div>
 
-## Triangle
+## Triangle Wave
 
-`BK_TRIANGLE` has 32 phases and is the only waveform which is not affected by the volume by default. It is either 0 or at its maximum for values greater than 0. This is because volume changes of triangle-like or sine-like waveforms do not sound very good.
+`BK_TRIANGLE` has 32 phases and is the only waveform which is not affected by the volume. It is either 0 or at its maximum for values greater than 0. This is because some sound chips also had no volume setting for triangle waves.
 
 {% highlight text %}
-              __
-            _|  |_
-          _|      |_
-        _|          |_
-      _|              |_
-    _|                  |_
-  _|                      |_
-_|__________________________|_______________________________
-                               |_                        _|
-                                 |_                    _|
-                                   |_                _|
-                                     |_            _|
-                                       |_        _|
-                                         |_    _|
-                                           |__|
+                __
+              _|  |_
+            _|      |_
+          _|          |_
+        _|              |_
+      _|                  |_
+    _|                      |_
+0 _|__________________________|_______________________________
+                                 |_                        _|
+                                   |_                    _|
+                                     |_                _|
+                                       |_            _|
+                                         |_        _|
+                                           |_    _|
+                                             |__|
 {% endhighlight %}
 
-The waveform is shifted to the left by 8 phases which is to use negative amplitudes as well to reduce potential overflows when mixing tracks.
+The waveform is shifted to the left by 8 phases. This is done to use negative amplitudes as well to reduce potential amplitude overflows when mixing the tracks.
 
 {% highlight c %}
 // Set triangle wave
@@ -94,13 +101,6 @@ BKTrackSetAttr (& track, BK_VOLUME, 0);
 BKTrackSetAttr (& track, BK_MASTER_VOLUME, 0.3 * BK_MAX_VOLUME);
 {% endhighlight %}
 
-To enable the volume attribute's normal behaviour anyway, the `BK_TRIANGLE_IGNORES_VOLUME` attribute can be set to 0:
-
-{% highlight c %}
-// Enable normal volume behaviour
-BKTrackSetAttr (& track, BK_TRIANGLE_IGNORES_VOLUME, 0);
-{% endhighlight %}
-
 <div class="buttons">
 	<div class="player" data-volume="0.7">
 		<a href="{{ "/assets/sound/waveforms/waveform-triangle.mp3" | prepend: site.baseurl }}" class="button">
@@ -110,9 +110,16 @@ BKTrackSetAttr (& track, BK_TRIANGLE_IGNORES_VOLUME, 0);
 	</div>
 </div>
 
+To enable the volume attribute's normal behaviour anyway, the attribute `BK_TRIANGLE_IGNORES_VOLUME` can be set to 0:
+
+{% highlight c %}
+// Enable normal volume behaviour
+BKTrackSetAttr (& track, BK_TRIANGLE_IGNORES_VOLUME, 0);
+{% endhighlight %}
+
 ## Noise
 
-Noise is a square wave whose phase amplitudes are randomly either 0 or at their full volume. This is controlled by a 16 bit random generator, which means that the noise pattern is repeated after 65536 phases. This can be heard on high notes.
+Noise is a square wave whose phase amplitudes are randomly either 0 or at their maximum volume. This is controlled by a 16 bit random generator, which means that the noise pattern is repeated after 65536 phases. This can be heard on high notes.
 
 *Interestingly, the random pattern contains a part which could be identified as a ghost voice.* 👻
 
@@ -131,7 +138,19 @@ Noise is a square wave whose phase amplitudes are randomly either 0 or at their 
 	</div>
 </div>
 
-## Sawtooth
+## Sawtooth Wave
+
+`BK_SAWTOOTH` has 7 phases.
+
+{% highlight text %}
+    ____
+   |    |____
+   |         |____
+   |              |____
+   |                   |____
+   |                        |____
+0 -|_____________________________|____
+{% endhighlight %}
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -142,7 +161,7 @@ Noise is a square wave whose phase amplitudes are randomly either 0 or at their 
 	</div>
 </div>
 
-## Sine
+## Sine Wave
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -153,9 +172,11 @@ Noise is a square wave whose phase amplitudes are randomly either 0 or at their 
 	</div>
 </div>
 
-## Custom waveforms
+## Custom Waveforms
 
-There is the possibility to define custom waveforms. The following example waveform sounds like the vocal "A":
+Custom waveforms can have an arbitary number of phases, but an absurd high number could create unwanted effects. Numbers around 8 and 32 are optimal. The number of phases does not affect the pitch. However, the waveform itself could contain overtones which would increase the pitch.
+
+The following is an example waveform that sounds like the vocal "A". It has 13 phases and, for simplification, its amplitude has only a resolution of 4 positive and negative values.
 
 {% highlight text %}
 +4 |    ||             || ||    ||    ||
@@ -171,10 +192,6 @@ There is the possibility to define custom waveforms. The following example wavef
       0  1  2  3  4  5  6  7  8  9 10 11 12
 {% endhighlight %}
 
-It has 13 phases which, for simplification, have a resolution of 4 steps. Waveforms can have an arbitary number of phases, but an absurd high number could create unwanted effects. Numbers around 8 and 64 are optimal.
-
-The number of phases doesn't affect the pitch. However, the waveform itself could contain overtones which would increase the pitch.
-
 <div class="buttons">
 	<div class="player" data-volume="0.7">
 		<a href="{{ "/assets/sound/waveforms/waveform-a.mp3" | prepend: site.baseurl }}" class="button">
@@ -184,9 +201,9 @@ The number of phases doesn't affect the pitch. However, the waveform itself coul
 	</div>
 </div>
 
-Waveform phases are wrapped into `BKData` objects. These objects can then be set to multiple tracks as `BK_WAVEFORM` pointer attributes.
+Custom waveforms are wrapped into `BKData` objects. These objects can then be set to multiple tracks as `BK_WAVEFORM` pointer attributes.
 
-*Like all `BKData` objects, they must exist as long as some tracks are using them. The example below declares it on the stack which is only for demonstration. Declare it globally or wrap it into another object which exists outside of the stack.*
+*Like all `BKData` objects, they must exist as long as some tracks are using them. In the code below the declaration is on the stack only for demonstration. They should be declared globally or wrapped into other objects which exist outside of the stack.*
 
 {% highlight c %}
 BKInt numPhases = 13;
@@ -211,13 +228,13 @@ BKDataNormalize (& waveform);
 BKTrackSetPtr (& track, BK_WAVEFORM, & waveform);
 {% endhighlight %}
 
-`BKDataNormalize` is used to expand the phases to their maximum values between `BK_MAX_VOLUME` and `-BK_MAX_VOLUME`, respectively. Otherwise, the waveform is not audible or the volume range can't be used completely.
+`BKDataNormalize` is used to expand the amplitudes to their maximum values of `BK_MAX_VOLUME` and `-BK_MAX_VOLUME`, respectively. Otherwise the waveform is not audible or the volume range cannot be used completely.
 
-Of course, the phases could already be defined with the maximum values, but in this case it's more readable.
+Of course, the phases could already be declared with their maximum amplitudes; this is only for readability.
 
-## Unsetting waveforms
+## Unsetting Waveforms
 
-A waveform can't be unset from a track, instead it has to be set to another one. This could be another custom waveform or a default one:
+A waveform cannot be unset from a track, instead it has to be set to another one. This could be another custom waveform or a default one:
 
 {% highlight c %}
 // Set a default waveform again

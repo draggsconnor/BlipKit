@@ -4,9 +4,19 @@ title: Effects
 order: 40
 ---
 
-Effects are used to "animate" certain track attributes. Single argument effects can be set with the normal attribute setter and getter functions. For effects with multiple arguments there are special functions: `BKTrackSetEffect` is used for setting effects and `BKTrackGetEffect` for reading effect values.
+Effects are used to "animate" certain track attributes. *Slide* effects "slide" their corresponding track attribute to a new value within a given time (e.g. *portamento* which slides to a new note). *Interval* effects periodicaly lower and/or raise their attribute values by a given amount and interval (e.g. *tremolo* which reduces the volume periodically). Time periods are specified in number of [ticks](../clocks-and-dividers/).
 
-## Volume slide
+Enabling an effect will begin updating the corresponding track attribute over the given time. Setting new values for an effect before its current slide period has finished will start the new slide period at the current interpolated values.
+
+Disabling an effect before its current slide period has finished will set the slide's end value immediately. Generally, all effects can be disabled by setting their first argument to 0.
+
+- [Volume Slide](#volume-slide)
+- [Panning Slide](#panning-slide)
+- [Portamento (Note Slide)](#portamento-note-slide)
+- [Tremolo](#tremolo)
+- [Vibrato](#vibrato)
+
+## Volume Slide
 
 `BK_EFFECT_VOLUME_SLIDE` sets the number of ticks in which `BK_VOLUME` is sliding to its new value.
 
@@ -33,7 +43,7 @@ BKTrackSetAttr (& track, BK_VOLUME, 0.125 * BK_MAX_VOLUME);
 	</div>
 </div>
 
-## Panning slide
+## Panning Slide
 
 `BK_EFFECT_PANNING_SLIDE` sets the number of ticks in which `BK_PANNING` is sliding to its new value.
 
@@ -63,9 +73,9 @@ The effect is disabled with 0.
 	</div>
 </div>
 
-## Portamento
+## Portamento (Note Slide)
 
-`BK_EFFECT_PORTAMENTO` sets the number of ticks in which `BK_NOTE` is sliding to its new value. If no note is set at the moment the new note is set immediately.
+`BK_EFFECT_PORTAMENTO` sets the number of ticks in which `BK_NOTE` is sliding to its new value. If no note is set at the moment, the new note is set immediately.
 
 {% highlight c %}
 BKInt ticks = 120;
@@ -95,9 +105,9 @@ The effect is disabled with 0.
 
 ## Tremolo
 
-`BK_EFFECT_TREMOLO` reduces the volume relatively to the current volume by the given amount repeatedly in the given number of ticks.
+`BK_EFFECT_TREMOLO` reduces the volume periodically by the given amount relatively to the current volume in the given number of ticks.
 
-One tremolo cycle consist of 2 phases. In the first phase the volume is reduced by the given amount. In the second phase the volume is raised up to the current volume again.
+One tremolo cycle consist of 2 phases, where in the first phase the volume is reduced by the given amount and in the second phase raised up again to the current value.
 
 {% highlight c %}
 BKInt tremolo [2] = {24, 0.5 * BK_VOLUME};
@@ -105,7 +115,7 @@ BKInt tremolo [2] = {24, 0.5 * BK_VOLUME};
 BKTrackSetEffect (& track, BK_EFFECT_TREMOLO, tremolo, sizeof (tremolo));
 {% endhighlight %}
 
-This would reduce the volume to 50% (1.0 - 0.5) of its current value within 24 ticks and raise it again within another 24 ticks.
+This reduces the volume to 50% of its current value within 24 ticks and raises it up again within another 24 ticks.
 
 {% highlight text %}
 Current volume ------\          /---- repeated
@@ -116,7 +126,7 @@ Current volume ------\          /---- repeated
 0.5 of current volume ----\/---------
 {% endhighlight %}
 
-The effects is disabled with NULL or by setting its first argument to 0.
+The effect is disabled with a NULL pointer or by setting its first argument to 0.
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -127,9 +137,9 @@ The effects is disabled with NULL or by setting its first argument to 0.
 	</div>
 </div>
 
-### Sliding values
+### Sliding to new values
 
-The number of ticks and volume reduction can also be slided. A third argument sets the number of ticks in which `BK_EFFECT_TREMOLO` is sliding to its new values.
+Normally, the effect values are set immediately. However, a third argument sets the number of ticks in which `BK_EFFECT_TREMOLO` is sliding to its new values.
 
 {% highlight c %}
 BKInt tremolo1 [2] = {24, 0.5 * BK_VOLUME};
@@ -139,7 +149,9 @@ BKTrackSetEffect (& track, BK_EFFECT_TREMOLO, tremolo1, sizeof (tremolo1));
 BKTrackSetEffect (& track, BK_EFFECT_TREMOLO, tremolo2, sizeof (tremolo2));
 {% endhighlight %}
 
-First, the tremolo effect is set immediately without sliding (`tremolo1`). Then with the second call, the effect is set to slide to the new values of `tremolo2` within 120 ticks. If setting new values to be slided to before the current slide has finished, the slide is started again from the current interpolated values.
+First, the tremolo effect is set immediately without sliding (`tremolo1`). Then the effect is set to slide to the new values of `tremolo2` within 120 ticks.
+
+When setting a new slide before the current one has finished, the slide is started at the current interpolated values.
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -152,9 +164,9 @@ First, the tremolo effect is set immediately without sliding (`tremolo1`). Then 
 
 ## Vibrato
 
-`BK_EFFECT_VIBRATO` raises and lowers the pitch relatively to the current note by the given number of halftones repeatedly in the given number of ticks.
+`BK_EFFECT_VIBRATO` raises and lowers the pitch periodically by the given number of halftones relatively to the current note in the given number of ticks.
 
-One vibrato cycle consist of 4 phases. In the first phase the pitch is raised by the given amount. In the second phase the pitch is lowered to 0 again. The next two phases are the mirrowed variant of the first two, in which the pitch is first lowered by the given amount and the raised up to 0 again.
+One vibrato cycle consist of 4 phases. In the first phase the pitch is raised up by the given amount and lowered again to 0 in the second phase. The next two phases are the mirrowed version of the first two, in which the pitch is first lowered by the given amount and the raised up to 0 again.
 
 {% highlight c %}
 BKInt vibrato [2] = {12, 0.6 * BK_FINT20_UNIT};
@@ -162,7 +174,7 @@ BKInt vibrato [2] = {12, 0.6 * BK_FINT20_UNIT};
 BKTrackSetEffect (& track, BK_EFFECT_VIBRATO, vibrato, sizeof (vibrato));
 {% endhighlight %}
 
-This would first raise the pitch by 3 halftones within 12 ticks and lower it again within another 12 ticks, followed by the mirrowed variant in which the pitch is lowered by 3 halftones within 12 ticks and raised again within another 12 ticks.
+This first raises the pitch up by 3 halftones within 12 ticks and lowers it again within another 12 ticks; followed by the mirrowed version in which the pitch is lowered by 3 halftones within 12 ticks and raised up again within another 12 ticks.
 
 {% highlight text %}
                       /\
@@ -176,7 +188,7 @@ This would first raise the pitch by 3 halftones within 12 ticks and lower it aga
                                \/
 {% endhighlight %}
 
-The effects is disabled with NULL or by setting its first argument to 0.
+The effect is disabled with a NULL pointer or by setting its first argument to 0.
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -187,9 +199,9 @@ The effects is disabled with NULL or by setting its first argument to 0.
 	</div>
 </div>
 
-### Sliding values
+### Sliding to new values
 
-The number of ticks and pitch amount can also be slided. A third argument sets the number of ticks in which `BK_EFFECT_VIBRATO` is sliding to its new values.
+Normally, the effect values are set immediately. However, a third argument sets the number of ticks in which `BK_EFFECT_VIBRATO` is sliding to its new values.
 
 {% highlight c %}
 BKInt vibrato1 [2] = {36, 3 * BK_FINT20_UNIT};
@@ -199,7 +211,9 @@ BKTrackSetEffect (& track, BK_EFFECT_VIBRATO, vibrato1, sizeof (vibrato1));
 BKTrackSetEffect (& track, BK_EFFECT_VIBRATO, vibrato2, sizeof (vibrato2));
 {% endhighlight %}
 
-First, the vibrato effect is set immediately without sliding (`vibrato1`). Then with the second call, the effect is set to slide to the new values of `vibrato2` within 240 ticks. If setting new values to be slided to before the current slide has finished, the slide is started again from the current interpolated values.
+First, the vibrato effect is set immediately without sliding (`vibrato1`). Then the effect is set to slide to the new values of `vibrato2` within 240 ticks.
+
+When setting a new slide before the current one has finished, the slide is started at the current interpolated values.
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">

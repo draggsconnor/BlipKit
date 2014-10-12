@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: BKContext Object
-order: 100
+order: 80
 ---
 
 `BKContext` is the base object and contains the channel sound buffers. The context is also responsible for running the [timers](../clocks/) which update the effects and invoke the beat callback functions.
@@ -22,11 +22,11 @@ BKContextInit (& ctx, 2, 44100);
 BKContextDispose (& ctx);
 {% endhighlight %}
 
-This initializes a `BKContent` object with 2 channels (stereo) and a sample rate of 44100 Hz. The maximum number of channels is `BK_MAX_CHANNELS` (8). The sample rate can range between `BK_MIN_SAMPLE_RATE` (16000) and `BK_MAX_SAMPLE_RATE` (96000). Lower or highter values are clamped.
+This initializes a `BKContent` object with 2 channels (stereo) and a sample rate of 44100 Hz. The maximum number of channels is `BK_MAX_CHANNELS` (8). The sample rate can range between `BK_MIN_SAMPLE_RATE` (16000) and `BK_MAX_SAMPLE_RATE` (96000). Lower or higher values are clamped.
 
 ## Attributes
 
-Attributes control the behaviour of a context object. The following list contains integer attributes which can be changed with with the function `BKContextSetAttr` or retrieved with the function `BKContextGetAttr`. Some attributes use a more complex data type and can be set with `BKContextSetPtr` or be retrieved with `BKContextGetPtr`.
+The following list contains attributes which can be set with with `BKContextSetAttr` or read with `BKContextGetAttr`. Some attributes use a more complex data type and can be set with `BKContextSetPtr` or read with `BKContextGetPtr`.
 
 <dl>
 <dt><var>BK_SAMPLE_RATE</var> (<var>BKInt</var>, read-only)</dt>
@@ -63,7 +63,7 @@ BKContextGetAttr (& ctx, BK_NUM_CHANNELS, & numChannels);
 <dt><var>BK_CLOCK_PERIOD</var> (<var>BKTime</var>)</dt>
 <dd>
 
-<p>The master clock's time period. This is a <a href="../clocks/">BKTime</a> struct. The default value is a 1/240th second (240 Hz). Use this attribute if a finer time granularity is required.</p>
+<p>The master clock's tick period. This is a <a href="../clocks/">BKTime</a> struct. The default value is a 1/240th second (240 Hz). Use this attribute if a finer time granularity is required.</p>
 
 {% highlight c %}
 // Make time value
@@ -98,14 +98,14 @@ BKContextGetPtr (& ctx, BK_TIME, & time);
 
 	BKInt BKContextInit (BKContext * ctx, BKInt numChannels, BKInt sampleRate)
 
-Initialize a context object `ctx` with `numChannel` channels and a samplet rate of `sampleRate`. On success `0` is returned.
+Initializes a context object `ctx` with `numChannel` channels and a samplet rate of `sampleRate`. Returns `0` on success.
 
 Possible return errors:
 
-`BK_ALLOCATION_ERROR` if memory could not be allocated.
+`BK_ALLOCATION_ERROR` if memory for the audio buffers could not be allocated.
 
 ### BKContextDispose
 
 	void BKContextDispose (BKContext * ctx)
 
-Dispose the context and free resources. Any attached `BKTrack` or `BKClock` objects will be detached.
+Dispose the object and free its resources. Any attached `BKTrack` or `BKClock` objects will be detached.

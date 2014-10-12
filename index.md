@@ -4,7 +4,7 @@ full_title: BlipKit
 order: 0
 ---
 
-BlipKit is a C library for creating the beautiful sound of old [soundchips](http://en.wikipedia.org/wiki/Chiptune).
+BlipKit is a C library for creating the beautiful sound of old [sound chips](http://en.wikipedia.org/wiki/Chiptune).
 
 * Generate [waveforms](manual/waveforms/): square, triangle, noise, sawtooth, sine and custom waveforms
 * Use an unlimited number of individual [tracks](manual/tracks/)
@@ -16,10 +16,10 @@ BlipKit is a C library for creating the beautiful sound of old [soundchips](http
 <p class="buttons">
 	<strong><a href="examples/" class="button">Examples</a></strong>
 	<strong><a href="manual/" class="button">Read manual</a></strong>
-	<a href="https://github.com/detomon/BlipKit" class="button">Get the latest version</a>
+	<a href="download/" class="button">Download</a>
 </p>
 
-## Basic example
+## Basic Example
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">
@@ -30,7 +30,7 @@ BlipKit is a C library for creating the beautiful sound of old [soundchips](http
 	</div>
 </div>
 
-This code demonstrates the basic steps to generate audio data of a square wave in the note *A* with enabled tremolo effect:
+This code demonstrates the basic steps to generate audio data of a [square wave](manual/waveforms/#square-wave) in the note *A* with enabled [tremolo effect](manual/effects/#tremolo):
 
 {% highlight c %}
 // Context object
@@ -62,12 +62,12 @@ BKTrackSetEffect (& track, BK_EFFECT_TREMOLO, tremolo, sizeof (tremolo));
 BKTrackAttach (& track, & ctx);
 
 // Define audio data buffer
-// As there are two channels used, the buffer actually must be
+// As there are 2 channels used, the buffer actually must be
 // two times the size than number of frames are requested
 BKFrame frames [512 * 2];
 
 // Generate 512 frames e.g. as they would be requested by an audio output function
-// Subsequent calls to this function generates the next requested number of frames
+// Subsequent calls to this function generate the next requested number of frames
 BKContextGenerate (& ctx, frames, 512);
 
 // The channels are interlaced into the buffer in the form: LRLR...
@@ -77,4 +77,4 @@ BKContextGenerate (& ctx, frames, 512);
 
 - [Read manual](manual/)
 - [More examples](examples/)
-- [Download latest version](https://github.com/detomon/BlipKit)
+- [Download BlipKit](download/)
