@@ -156,6 +156,8 @@ nav {
 			text-indent: -9999px;
 			display: block;
 			opacity: 0.66;
+			background-repeat: no-repeat;
+			background-position: center;
 			@include full-background();
 			@include transition(opacity linear 0.1s);
 
