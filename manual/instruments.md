@@ -2,6 +2,7 @@
 layout: doc
 title: Instruments
 order: 50
+description: Instruments create envelopes over certain track attributes. An envelope changes its corresponding track attribute stepwise relatively to the current attribute value while the note is playing.
 ---
 
 Instruments create envelopes over certain track attributes. An envelope changes its corresponding track attribute stepwise relatively to the current attribute value while the note is playing. (An exception is the *duty cycle* envelope, which sets absolute values).

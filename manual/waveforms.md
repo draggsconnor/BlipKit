@@ -2,6 +2,7 @@
 layout: doc
 title: Waveforms
 order: 30
+description: Waveforms consist of a certain number of *hases (amplitude steps). Tracks have predefined waveforms which are typical for old sound chips.
 ---
 
 Waveforms consist of a certain number of *phases* (amplitude steps). Each phase is a value in the range from `-BK_MAX_VOLUME` to `+BK_MAX_VOLUME`. When playing a note, the waveform and with it its phases are scaled so that they are in the correct pitch. Tracks have predefined waveforms which are typical for old sound chips.

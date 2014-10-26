@@ -2,6 +2,7 @@
 layout: doc
 title: Arpeggio Notes
 order: 60
+description: Arpeggio notes are used to play multiple notes fast and repeatedly after each other. As they are only played for a short time, it gives the impression of multiple notes playing at the same time.
 ---
 
 - [Note Length](#note-length)

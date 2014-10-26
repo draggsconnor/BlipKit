@@ -2,6 +2,7 @@
 layout: doc
 title: Effects
 order: 40
+description: Effects are used to 'animate' certain track attributes.
 ---
 
 Effects are used to "animate" certain track attributes. *Slide* effects "slide" their corresponding track attribute to a new value within a given time (e.g. *portamento* which slides to a new note). *Interval* effects periodicaly lower and/or raise their attribute values by a given amount and interval (e.g. *tremolo* which reduces the volume periodically). Time periods are specified in number of [ticks](../clocks-and-dividers/).

@@ -1,7 +1,6 @@
 ---
 layout: doc
 title: Download
-full_title: Download BlipKit
 order: 3
 ---
 

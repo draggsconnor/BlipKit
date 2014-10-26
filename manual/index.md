@@ -2,6 +2,7 @@
 layout: doc
 title: Manual
 order: 10
+description: This is an overview of the library's concept and its basic objects. Basically, all object variables are declared statically. This way, memory allocations can be optimized.
 ---
 
 This is an overview of the library's concept and its basic objects. Basically, all object variables are declared statically. This way, memory allocations can be optimized for the own needs.

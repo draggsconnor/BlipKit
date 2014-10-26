@@ -2,6 +2,7 @@
 layout: doc
 title: Fixed-Point Numbers
 order: 100
+description: Fixed-point numbers are used to represent floating point numbers in form of integers.
 ---
 
 Fixed-point numbers are used to represent floating point numbers in form of integers. They have some advantages in certain situations. However, the downside is that they are limited to a relatively small value range depending on the desired precision.
