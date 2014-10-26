@@ -5,9 +5,9 @@ order: 40
 description: Effects are used to 'animate' certain track attributes.
 ---
 
-Effects are used to "animate" certain track attributes. *Slide* effects "slide" their corresponding track attribute to a new value within a given time (e.g. *portamento* which slides to a new note). *Interval* effects periodicaly lower and/or raise their attribute values by a given amount and interval (e.g. *tremolo* which reduces the volume periodically). Time periods are specified in number of [ticks](../clocks-and-dividers/).
+Effects are used to "animate" certain track attributes. *Slide* effects "slide" their corresponding track attribute to a new value within a given time (e.g. *portamento* which slides to a new note). *Interval* effects periodically lower and/or raise their attribute values by a given amount and interval (e.g. *tremolo* which reduces the volume periodically). Time periods are specified in number of [ticks](../clocks-and-dividers/).
 
-Enabling an effect will begin updating the corresponding track attribute over the given time. Setting new values for an effect before its current slide period has finished will start the new slide period at the current interpolated values.
+Enabling an effect will begin updating the corresponding track attribute over the given time. Setting new values for an effect before its current slide period has finished, will start the new slide period at the current interpolated values.
 
 Disabling an effect before its current slide period has finished will set the slide's end value immediately. Generally, all effects can be disabled by setting their first argument to 0.
 

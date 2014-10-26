@@ -5,9 +5,9 @@ order: 10
 description: This is an overview of the library's concept and its basic objects. Basically, all object variables are declared statically. This way, memory allocations can be optimized.
 ---
 
-This is an overview of the library's concept and its basic objects. Basically, all object variables are declared statically. This way, memory allocations can be optimized for the own needs.
+This is an overview of the library's concept and its basic objects. Basically, all object variables are declared statically. This way, memory allocations can be optimized.
 
-*Although the objects in the example code snippets are declared in a function-like context, it should be remembered to declare them globally or wrapped inside other objects so they exist further when a function returns.*
+*Although the objects in the example snippets are declared in a function-like context, they should be declared globally or wrapped inside other objects, so they exist further when a function returns.*
 
 - [Context Object](#context-object)
 - [Track Objects](#track-objects)
@@ -64,7 +64,7 @@ A track can only play one note at once. The `BK_NOTE` attribute sets the track's
 BKTrackSetAttr (& track, BK_NOTE, BK_C_3 * BK_FINT20_UNIT);
 {% endhighlight %}
 
-The constants `BK_C_0` to `BK_C_8` are values between 0 and 96 and used for readability. Of course, their equivalent integer values can be used as well for setting notes.
+The constants `BK_C_0` to `BK_C_8` are values between 0 and 96 and used for readability. Of course, their equivalent integer values can be used as well.
 
 To unset the note, it can either be set to `BK_NOTE_RELEASE` or `BK_NOTE_MUTE`. The latter has a different behaviour when using [instruments](instruments/); it does not play the envelopes' release parts and mutes the note immediately.
 
@@ -98,38 +98,42 @@ BKContextGenerate (& ctx, frames, 512);
 
 ## Creating a Beat
 
-The context object contains a master clock which has a tick rate of 240 Hz. This *ticks* are the base for [effects](effects/), [instruments](../instruments/) and [arpeggio notes](arepggio/).
+The context object contains a master clock which has a default tick rate of 240 Hz. This *ticks* are the *beat* for all [effects](effects/), [instruments](../instruments/) and [arpeggio notes](arepggio/). The master clock also has a 0th tick at the very beginning.
 
-<!--[[[BKDivider](clocks-and-dividers/) objects reduce the tick rate by a given factor by calling a provided callback every specific number of tick of the master clock.]]-->
+It is recommended to use a beat that is synchronized with the master clock. For this purpose, there are [BKDivider](clocks-and-dividers/) objects. They reduce the tick rate by a given factor and call a provided callback at specified intervals.
+
+For example, initializing a divider object with a value of 24, will call its callback at every 24th tick of the master clock, and once at the 0th tick.
 
 {% highlight c %}
 // Divider object
 BKDivider divider;
 
 // The callback struct is only used for initializing the divider
-BKDividerCallback callback;
+BKDividerCallback callback = {
+	.func     = dividerCallback,
+	.userInfo = NULL,
+};
 
-// Set callback function
-callback.func     = dividerCallback;
-callback.userInfo = NULL;
-
-// Initialize divider object with a value of 60
-// The callback is called every 60th tick of the master clock
-BKDividerInit (& divider, 60, & callback);
+// Initialize divider object with a value of 24
+// The callback is called every 24th tick of the master clock
+BKDividerInit (& divider, 24, & callback);
 
 // Attach the divider to the context's master clock
-// When frames are generated the callback is called at the defined interval points
+// When frames are generated, the callback is called in the defined interval
 BKContextAttachDivider (& ctx, & divider, BK_CLOCK_TYPE_BEAT);
 {% endhighlight %}
 
-The callback function receives two arguments. The first one contains the `BKDivider` object and information about the event. The second one is the user defined pointer given at initialization. The function should always return 0 as there are no other values defined at the moment.
+The callback function receives two arguments. The first one is an information struct that also contains the divider object. The second one is the user defined pointer given at initialization. The function should always return 0, as there are no other values defined at the moment.
 
 {% highlight c %}
+// This function is called every 24th tick of the master clock
 BKEnum dividerCallback (BKCallbackInfo * info, void * userInfo)
 {
-	BKDivider * divider = info -> object;
-
 	// Update track attributes ...
+
+	// The divider interval can also be set permanently to another value
+	// The next call of the function will be in 20 ticks
+	info -> divider = 20;
 
 	return 0;
 }

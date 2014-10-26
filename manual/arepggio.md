@@ -8,7 +8,7 @@ description: Arpeggio notes are used to play multiple notes fast and repeatedly 
 - [Note Length](#note-length)
 - [Pitch Shifting](#pitch-shifting)
 
-Arpeggio notes are used to play multiple notes fast and repeatedly after each other. As they are only played for a short time, this gives the impression of multiple notes playing at the same time. This makes it a good way to play chords for example, as the notes are played relatively to the track note. They can be used independently of [pitch envelopes](../instruments).
+Arpeggio notes are used to play multiple notes fast and repeatedly after each other. As they are only played for a short time, it gives the impression of multiple notes playing at the same time. This makes it a good way to play chords for example, as the notes are played relatively to the track note. They can be used independently of [pitch envelopes](../instruments).
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">

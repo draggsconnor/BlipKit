@@ -5,7 +5,7 @@ order: 100
 description: Fixed-point numbers are used to represent floating point numbers in form of integers.
 ---
 
-Fixed-point numbers are used to represent floating point numbers in form of integers. They have some advantages in certain situations. However, the downside is that they are limited to a relatively small value range depending on the desired precision.
+Fixed-point numbers are used to represent floating point numbers in form of integers. They have some advantages in certain situations. However, the downside is that they are limited to a relatively small value range, depending on the desired precision.
 
 The library defines a type `BKFInt20` and its unsigned variant `BKFUInt20`. This is a 32 bit fixed-point number which has its integer part in the upper 12 bits and the fractional part in the lower 20 bits. Its absolute integer value is 4095 for the unsigned version and 2047 for the signed one.
 

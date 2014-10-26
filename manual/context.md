@@ -1,14 +1,14 @@
 ---
 layout: doc
-title: BKContext Object
+title: Context Object
 order: 80
+description: BKContext is the base object and contains the channel sound buffers.
 ---
 
-`BKContext` is the base object and contains the channel sound buffers. The context is also responsible for running the [timers](../clocks/) which update the effects and invoke the beat callback functions.
+`BKContext` is the base object and contains the channel sound buffers. The context is also responsible for running the attached [clocks](../clocks-and-dividers/).
 
 {% highlight c %}
-// Context objects are defined statically
-// You have to ensure that the variable is around as long as the context is used
+// The context object
 BKContext ctx;
 
 // Initialize context object
@@ -29,8 +29,10 @@ This initializes a `BKContent` object with 2 channels (stereo) and a sample rate
 The following list contains attributes which can be set with with `BKContextSetAttr` or read with `BKContextGetAttr`. Some attributes use a more complex data type and can be set with `BKContextSetPtr` or read with `BKContextGetPtr`.
 
 <dl>
-<dt><var>BK_SAMPLE_RATE</var> (<var>BKInt</var>, read-only)</dt>
+<dt><var>BK_SAMPLE_RATE</var> (read-only)</dt>
 <dd>
+
+<p>Data type: <var>BKInt</var></p>
 
 <p>The sample rate on which basis the note frequencies are calculated. This attribute is read-only and can only be set at initialization.</p>
 
@@ -44,8 +46,10 @@ BKContextGetAttr (& ctx, BK_SAMPLE_RATE, & sampleRate);
 {% endhighlight %}
 
 </dd>
-<dt><var>BK_NUM_CHANNELS</var> (<var>BKInt</var>, read-only)</dt>
+<dt><var>BK_NUM_CHANNELS</var> (read-only)</dt>
 <dd>
+
+<p>Data type: <var>BKInt</var></p>
 
 <p>Number of channels in which the sound data is rendered. Attributes and track effects which affect panning have only an effect when this number is exactly 2 (stereo). This attribute is read-only and can only be set at initialization.</p>
 
@@ -60,10 +64,12 @@ BKContextGetAttr (& ctx, BK_NUM_CHANNELS, & numChannels);
 
 </dd>
 
-<dt><var>BK_CLOCK_PERIOD</var> (<var>BKTime</var>)</dt>
+<dt><var>BK_CLOCK_PERIOD</var></dt>
 <dd>
 
-<p>The master clock's tick period. This is a <a href="../clocks/">BKTime</a> struct. The default value is a 1/240th second (240 Hz). Use this attribute if a finer time granularity is required.</p>
+<p>Data type: <var>BKTime</var></p>
+
+<p>The master clock's tick period. This is a <a href="../clocks-and-dividers/">BKTime</a> struct. The default value is a 1/240th second (240 Hz). Use this attribute if a finer time granularity is required.</p>
 
 {% highlight c %}
 // Make time value
@@ -77,8 +83,10 @@ BKContextGetPtr (& ctx, BK_CLOCK_PERIOD, & time);
 {% endhighlight %}
 
 </dd>
-<dt><var>BK_TIME</var> (<var>BKTime</var>, read-only)</dt>
+<dt><var>BK_TIME</var> (read-only)</dt>
 <dd>
+
+<p>Data type: <var>BKTime</var></p>
 
 <p>This is the current absolute number of frames generated since initialization or the last reset of the context.</p>
 
@@ -98,14 +106,14 @@ BKContextGetPtr (& ctx, BK_TIME, & time);
 
 	BKInt BKContextInit (BKContext * ctx, BKInt numChannels, BKInt sampleRate)
 
-Initializes a context object `ctx` with `numChannel` channels and a samplet rate of `sampleRate`. Returns `0` on success.
+Initializes a context object `ctx` with `numChannel` channels and a sample rate of `sampleRate`. Returns `0` on success.
 
 Possible return errors:
 
-`BK_ALLOCATION_ERROR` if memory for the audio buffers could not be allocated.
+`BK_ALLOCATION_ERROR` if memory allocation for the audio buffers failed.
 
 ### BKContextDispose
 
 	void BKContextDispose (BKContext * ctx)
 
-Dispose the object and free its resources. Any attached `BKTrack` or `BKClock` objects will be detached.
+Dispose the object and free its resources. Any attached `BKTrack`, `BKClock` and `BKDivider` object will be detached.
