@@ -1,9 +1,8 @@
-stepticks:24;
+stepticks:24
 
-track:begin:sine;
+[track:sine
 
-	a:c2;s:16;r;s:1;
-	s:1;
-	z;
+	a:c2;s:16;r;s:1
+	s:1
 
-track:end;
+]

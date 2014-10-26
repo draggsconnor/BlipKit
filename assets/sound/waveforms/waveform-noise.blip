@@ -1,13 +1,12 @@
-stepticks:24;
+stepticks:24
 
-track:begin:noise;
+[track:noise
 
-	v:127;
-	a:c2;s:8;r;
-	a:c4;s:8;r;
-	a:c8;s:8;r;
-	a:c0;s:8;r;
-	s:1;
-	z;
+	v:127
+	a:c2;s:8;r
+	a:c4;s:8;r
+	a:c8;s:8;r
+	a:c0;s:8;r
+	s:1
 
-track:end;
+]

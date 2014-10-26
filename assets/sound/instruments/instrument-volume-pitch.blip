@@ -1,18 +1,17 @@
-stepticks:24;
+stepticks:24
 
-instr:begin;
-	v:4:3:63:127:192:255:255:178:153:204:153:102:51:0;
-	a:2:1:1200:1200:0:-1200;
-instr:end;
+[instr
+	v:4:3:63:127:192:255:255:178:153:204:153:102:51:0
+	a:2:1:1200:1200:0:-1200
+]
 
-track:begin:square;
+[track:square
 
-	e:pr:48;
-	i:0;
-	a:c2;s:4;r;s:4;
-	a:c3;s:4;r;s:4;
-	a:c2;a:d#2;s:4;r;s:4;
-	a:g2;s:4;r;s:4;
-	z;
+	e:pr:48
+	i:0
+	a:c2;s:4;r;s:4
+	a:c3;s:4;r;s:4
+	a:c2;a:d#2;s:4;r;s:4
+	a:g2;s:4;r;s:4
 
-track:end;
+]

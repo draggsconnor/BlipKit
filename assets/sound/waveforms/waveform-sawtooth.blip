@@ -1,17 +1,16 @@
-stepticks:24;
+stepticks:24
 
-track:begin:sawtooth;
+[track:sawtooth
 
-	e:pr:24;
-	a:c2;s:2;r;
-	a:c1;s:2;r;
-	a:c2;s:2;r;
-	a:c1;s:2;r;
-	a:d#1;s:2;r;
-	a:g1;s:2;r;
-	a:g#1;s:3;r;s:1;
-	a:g1;a:f1;s:3;r;s:1;
-	s:1;
-	z;
+	e:pr:24
+	a:c2;s:2;r
+	a:c1;s:2;r
+	a:c2;s:2;r
+	a:c1;s:2;r
+	a:d#1;s:2;r
+	a:g1;s:2;r
+	a:g#1;s:3;r;s:1
+	a:g1;a:f1;s:3;r;s:1
+	s:1
 
-track:end;
+]

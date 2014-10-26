@@ -1,11 +1,10 @@
-stepticks:20;
+stepticks:20
 
-track:begin:square;
+[track:square
 
-	e:tr:20:168;
-	a:a3;s:32;r;
-	s:1;
-	e:tr;
-	z;
+	e:tr:20:168
+	a:a3;s:32;r
+	s:1
+	e:tr
 
-track:end;
+]
