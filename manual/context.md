@@ -19,7 +19,7 @@ BKContextInit (& ctx, 2, 44100);
 
 // Dispose context object when not used anymore
 // Track which are still attached are detached now and resources are freed
-BKContextDispose (& ctx);
+BKDispose (& ctx);
 {% endhighlight %}
 
 This initializes a `BKContent` object with 2 channels (stereo) and a sample rate of 44100 Hz. The maximum number of channels is `BK_MAX_CHANNELS` (8). The sample rate can range between `BK_MIN_SAMPLE_RATE` (16000) and `BK_MAX_SAMPLE_RATE` (96000). Lower or higher values are clamped.
@@ -40,7 +40,7 @@ The following list contains attributes which can be set with with `BKContextSetA
 BKInt sampleRate;
 
 // Read sample rate
-BKContextGetAttr (& ctx, BK_SAMPLE_RATE, & sampleRate);
+BKGetAttr (& ctx, BK_SAMPLE_RATE, & sampleRate);
 
 // sampleRate has the value 44100
 {% endhighlight %}
@@ -57,7 +57,7 @@ BKContextGetAttr (& ctx, BK_SAMPLE_RATE, & sampleRate);
 BKInt numChannels;
 
 // Read number of channels
-BKContextGetAttr (& ctx, BK_NUM_CHANNELS, & numChannels);
+BKGetAttr (& ctx, BK_NUM_CHANNELS, & numChannels);
 
 // numChannels has the value 2
 {% endhighlight %}
@@ -76,10 +76,10 @@ BKContextGetAttr (& ctx, BK_NUM_CHANNELS, & numChannels);
 BKTime time = BKTimeFromSeconds (& ctx, 1.0 / 240.0);
 
 // Set period of the master clock
-BKContextSetPtr (& ctx, BK_CLOCK_PERIOD, & time);
+BKSetPtr (& ctx, BK_CLOCK_PERIOD, & time, sizeof (time));
 
 // Get period of the master clock
-BKContextGetPtr (& ctx, BK_CLOCK_PERIOD, & time);
+BKGetPtr (& ctx, BK_CLOCK_PERIOD, & time, sizeof (time));
 {% endhighlight %}
 
 </dd>
@@ -94,7 +94,7 @@ BKContextGetPtr (& ctx, BK_CLOCK_PERIOD, & time);
 BKTime time;
 
 // Get absolute time
-BKContextGetPtr (& ctx, BK_TIME, & time);
+BKGetPtr (& ctx, BK_TIME, & time, sizeof (time));
 {% endhighlight %}
 
 </dd>
@@ -110,10 +110,14 @@ Initializes a context object `ctx` with `numChannel` channels and a sample rate 
 
 Possible return errors:
 
-`BK_ALLOCATION_ERROR` if memory allocation for the audio buffers failed.
+`BK_ALLOCATION_ERROR` if memory allocation failed.
 
-### BKContextDispose
+### BKContextAlloc
 
-	void BKContextDispose (BKContext * ctx)
+	BKInt BKContextAlloc (BKContext ** outCtx, BKInt numChannels, BKInt sampleRate)
 
-Dispose the object and free its resources. Any attached `BKTrack`, `BKClock` and `BKDivider` object will be detached.
+Allocate and initializes a context object `ctx` with `numChannel` channels and a sample rate of `sampleRate`. Returns `0` on success.
+
+Possible return errors:
+
+`BK_ALLOCATION_ERROR` if memory allocation failed.

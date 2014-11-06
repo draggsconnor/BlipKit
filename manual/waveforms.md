@@ -143,6 +143,8 @@ Noise is a square wave whose phase amplitudes are randomly either 0 or at their 
 
 `BK_SAWTOOTH` has 7 phases.
 
+TODO
+
 {% highlight text %}
     ____
    |    |____
@@ -163,6 +165,10 @@ Noise is a square wave whose phase amplitudes are randomly either 0 or at their 
 </div>
 
 ## Sine Wave
+
+`BK_SINE` has 32 phases.
+
+TODO
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">

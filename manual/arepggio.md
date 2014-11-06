@@ -45,13 +45,3 @@ BKTrackSetAttr (& track, BK_ARPEGGIO_DIVIDER, 12);
 		<div class="label"><a href="{{ "/assets/sound/arpeggio/arpeggio-minor-12-ticks.mp3" | prepend: site.baseurl }}">Arpeggio Minor with 12 Ticks</a></div>
 	</div>
 </div>
-
-## Pitch Shifting
-
-Arpeggio notes can be used to make a pitch shift for the whole track. For example, using only a single note with the value `-12 * BK_FINT20_UNIT` would lower the track's pitch by 1 octave.
-
-{% highlight c %}
-BKInt arpeggio [2] = {1, -12 * BK_FINT20_UNIT};
-
-BKTrackSetPtr (& track, BK_ARPGGIO, arpeggio);
-{% endhighlight %}
