@@ -5,7 +5,7 @@ order: 10
 description: This is an overview of the library's concept and its basic objects.
 ---
 
-This is an overview of the library's concept and its basic objects. Objects have functions for either initializing them statically, or to allocate them dynamically. Statically declared objecs can be wrapped into other structs to reduce memory allocations.
+This is an overview of the library's concept and its basic objects. Objects can be declared and initialized statically, or allocated. Statically declared objecs can be wrapped into other structs to reduce memory allocations.
 
 *Although the objects in the example snippets are declared in a function-like context, they should be declared globally or wrapped inside other objects, so they exist further when a function returns.*
 
@@ -18,7 +18,7 @@ This is an overview of the library's concept and its basic objects. Objects have
 
 ## Context Object
 
-[BKContext](context/) is the base object. The number of needed channels is defined at initialization (usually 2 for stereo). The sample rate should match that one which is used to output the audio, otherwise speed and pitch will not match.
+[BKContext](context/) is the base object. The number of needed channels is defined at initialization (usually 2 for stereo). The sample rate should match the one which is used to output the audio, otherwise speed and pitch will not match.
 
 {% highlight c %}
 // The context object
@@ -117,12 +117,13 @@ BKGetPtr (& track, BK_SAMPLE_RANGE, range, sizeof (range));
 
 - [Track attributes](tracks/#attributes)
 - [Context attributes](context/#attributes)
+- [Data attributes](data/#attributes)
 
 ## Disposing Object
 
 When an object is not used anymore, is should be disposed to free its resources. There is a general dispose function `BKDispose` which can be used on all objects.
 
-Object are detached from the object which they are attached to when disposed.
+When disposing, the objects are detached from the objects which they are attached to.
 
 {% highlight c %}
 BKTrack track;

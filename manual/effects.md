@@ -33,7 +33,7 @@ BKTrackSetEffect (& track, BK_EFFECT_VOLUME_SLIDE, & ticks, sizeof (ticks));
 BKTrackSetAttr (& track, BK_VOLUME, 0.125 * BK_MAX_VOLUME);
 {% endhighlight %}
 
- The effect is disabled with 0.
+The effect is disabled with 0.
 
 <div class="buttons">
 	<div class="player" data-volume="0.7">

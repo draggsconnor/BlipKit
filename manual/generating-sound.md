@@ -5,7 +5,7 @@ order: 15
 description: Tracks generate waveforms or play samples. Instruments can be used to create envelopes and effects can be enabled to animate certain track attributes.
 ---
 
-Tracks generate [waveforms](../waveforms/) or play [samples](../playing-samples/). They generate their own layer of audio data and do not interfere with each other. [Instruments](../instruments/) can be used to create envelopes and [effects](../effects/) can be enabled to animate certain track attributes.
+Tracks generate [waveforms](../waveforms/) or play [samples](../playing-samples/). [Instruments](../instruments/) can be used to create envelopes and [effects](../effects/) can be enabled to animate certain track attributes.
 
 {% highlight c %}
 // The track object
@@ -114,7 +114,7 @@ BKEnum dividerCallback (BKCallbackInfo * info, void * userInfo)
 }
 {% endhighlight %}
 
-## Atttributes
+## Attributes
 
 The attributes of the track object.
 
@@ -199,6 +199,32 @@ BKSetAttr (& track, BK_PANNING, -0.25 * BK_MAX_VOLUME);
 {% endhighlight %}
 </dd>
 
+<dt><var>BK_INSTRUMENT</var></dt>
+<dd>
+<p>Sets the track's <a href="../instruments/">instrument</a>.</p>
+
+{% highlight c %}
+// Instrument object declared elsewhere
+BKInstrument * instrument = ...;
+
+// Set instrument
+BKSetPtr (& track, BK_INSTRUMENT, instrument);
+{% endhighlight %}
+</dd>
+
+<dt><var>BK_SAMPLE</var></dt>
+<dd>
+<p>Sets the <a href="../samples/">sample</a> to play.</p>
+
+{% highlight c %}
+// Sample object declared elsewhere
+BKData * sample = ...;
+
+// Set sample
+BKSetPtr (& track, BK_SAMPLE, sample);
+{% endhighlight %}
+</dd>
+
 <dt><var>BK_PITCH</var></dt>
 <dd>
 <p>Sets the track's pitch.</p>
@@ -213,7 +239,8 @@ BKSetAttr (& track, BK_PITCH, 12 * BK_FINT20_UNIT);
 <dt><var>BK_PHASE_WRAP</var></dt>
 <dd>
 <p>Sets the number of frames at which the waveform resets its phase.</p>
-<p>This is insteresting for the noise waveform <code>BK_NOISE</code>.</p>
+<p>This is interesting for the noise waveform <code>BK_NOISE</code>. Other waveforms may sound distorted.</p>
+<p>The value is reset when a new waveform set.</p>
 
 {% highlight c %}
 // Set noise waveform
@@ -226,9 +253,10 @@ BKSetAttr (& track, BK_PHASE_WRAP, 128);
 
 <dt><var>BK_SAMPLE_RANGE</var></dt>
 <dd>
-<p>Sets the frame range of the <a href="../playing-samples/">sample</a>.</p>
+<p>Sets the playable frame range of the <a href="../playing-samples/">sample</a>.</p>
 <p>This is an array of two integers, in which the first value defines the start offset, and second one the end offset. The end offset itself is not included in the range.</p>
 <p>If a offset is negative, it is relative to the sample end + 1. So a value of -1 for the range end will be the sample length.</p>
+<p>The range is reset when a new sample is set.</p>
 
 {% highlight c %}
 BKInt range [2] = {6400, 12600};
@@ -245,7 +273,7 @@ BKInt range [2] = {12600, 6400};
 // Set reversed sample range
 BKSetPtr (& track, BK_SAMPLE_RANGE, range, sizeof (range));
 
-BKInt range2 [2] = {0, -1};
+BKInt range2 [2] = {-1, 0};
 
 // Reverse the whole sample
 BKSetPtr (& track, BK_SAMPLE_RANGE, range2, sizeof (range2));
@@ -256,6 +284,17 @@ BKSetPtr (& track, BK_SAMPLE_RANGE, range2, sizeof (range2));
 <dt><var>BK_SAMPLE_REPEAT</var></dt>
 <dd>
 <p>Loops the sample indefinitely when set to 1 as long as the note is set. Default is 0.</p>
+
+{% highlight c %}
+// Loop sample forever
+BKSetAttr (& track, BK_SAMPLE_REPEAT, 1);
+{% endhighlight %}
+</dd>
+
+<dt><var>BK_SAMPLE_PITCH</var></dt>
+<dd>
+<p>Sets the pitch of the <a href="../samples/">sample</a>. The value is added to the <code>BK_NOTE</code> attribute. Default is 0.</p>
+<p>When setting a new sample, its attributes `BK_SAMPLE_PITCH` is copied.</p>
 
 {% highlight c %}
 // Loop sample forever
