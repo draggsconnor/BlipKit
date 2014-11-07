@@ -13,7 +13,7 @@ for line in $(find . -iname '*.blip'); do
 	name=`echo "$line" | sed "s/\.blip$//g"`
 	blip=$name.blip
 	mp3=$name.mp3
-	wav=$name.wav
+	wav=$name~.wav
 	bliptime=`stat -f '%c' $blip`
 	mp3time=`stat -f '%c' $mp3`
 

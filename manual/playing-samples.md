@@ -14,7 +14,7 @@ Samples are loaded into the general audio data container [`BKData`](../data/) an
 BKData data;
 
 // Open WAVE file
-FILE * file = fopen ("sample.wav", "rb");
+FILE * file = fopen ("pika.wav", "rb");
 
 // Initialize sample object with audio data from file
 BKDataInitAndLoadWAVE (& data, file);
@@ -25,9 +25,18 @@ BKSetPtr (& track, BK_SAMPLE, & data);
 // Play sample in original pitch
 BKSetAttr (& track, BK_NOTE, BK_C_4 * BK_FINT20_UNIT);
 
-// Play sample 1 octave lower
-BKSetAttr (& track, BK_NOTE, BK_C_3 * BK_FINT20_UNIT);
+// Play sample 1 octave higher
+BKSetAttr (& track, BK_NOTE, BK_C_5 * BK_FINT20_UNIT);
 {% endhighlight %}
+
+<div class="buttons">
+	<div class="player" data-volume="0.7">
+		<a href="{{ "/assets/sound/samples/pika.mp3" | prepend: site.baseurl }}" class="button">
+			Pika
+		</a>
+		<div class="label"><a href="{{ "/assets/sound/samples/pika.mp3" | prepend: site.baseurl }}">Pika</a></div>
+	</div>
+</div>
 
 ## Normalizing
 

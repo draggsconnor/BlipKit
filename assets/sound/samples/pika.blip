@@ -1,0 +1,23 @@
+stepticks:28
+
+[samp:
+	load:wav:pika.wav
+]
+
+[track:square
+
+	%d:0;dr:1
+	%a:c4;s:8;r;
+
+	%dn:20000:400;
+	%a:c3;a:g3;s:4;r;
+	%a:c3;a:g#3;s:4;r
+
+	%dn:0:8000
+	%e:pr:390;a:c6;a:c3;s:16;r
+
+	d:0
+	a:c4;s:16;r;
+	a:c5;s:8;r;
+
+]
