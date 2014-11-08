@@ -7,7 +7,7 @@ order: 0
 BlipKit is a C library for creating the beautiful sound of old [sound chips](http://en.wikipedia.org/wiki/Chiptune).
 
 * Generate [waveforms](manual/waveforms/): square, triangle, noise, sawtooth, sine and custom waveforms
-* Use an unlimited number of individual [tracks](manual/tracks/)
+* Use an unlimited number of individual [tracks](manual/generating-sound/)
 * Use stereo output or up to 8 channels
 * Define [instruments](manual/instruments/) to create envelopes and other interesting effects
 * Use [effects](manual/effects/): portamento, tremolo, vibrato and some more
