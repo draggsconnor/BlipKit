@@ -13,8 +13,7 @@ This is an overview of the library's concept and its basic objects. Objects can 
 - [Track Objects](#track-objects)
 - [Attributes](#attributes)
 - [Playing a Note](#playing-a-note)
-- [Generating Audio Data](#generating-audio-data)
-- [Creating a Beat](#creating-a-beat)
+- [Disposing Objects](#disposing-objects)
 
 ## Context Object
 
@@ -55,7 +54,7 @@ BKTrackAttach (& track, & ctx);
 The functions can be used for all objects, although not every object implements all attributes. If an object does not support an attribute or its value in invalid, an error code is returned.
 
 <dl>
-<dt><var>BKSetAttr</var></dt>
+<dt><var>BKInt <strong>BKSetAttr</strong> (void * object, BKEnum attr, BKInt value)</var></dt>
 <dd>
 
 <p>Sets an integer attribute.</p>
@@ -67,7 +66,7 @@ BKSetAttr (& track, BK_DUTY_CYCLE, value);
 {% endhighlight %}
 </dd>
 
-<dt><var>BKGetAttr</var></dt>
+<dt><var>BKInt <strong>BKGetAttr</strong> (void const * object, BKEnum attr, BKInt * outValue)</var></dt>
 <dd>
 <p>Retreives an integer attribute.</p>
 
@@ -78,7 +77,7 @@ BKGetAttr (& track, BK_DUTY_CYCLE, & value);
 {% endhighlight %}
 </dd>
 
-<dt><var>BKSetPtr</var></dt>
+<dt><var>BKInt <strong>BKSetPtr</strong> (void * object, BKEnum attr, void * ptr)</var></dt>
 <dd>
 <p>Sets a pointer or struct attribute.</p>
 
@@ -96,7 +95,7 @@ BKSetPtr (& track, BK_SAMPLE_RANGE, range, sizeof (range));
 {% endhighlight %}
 </dd>
 
-<dt><var>BKGetPtr</var></dt>
+<dt><var>BKInt <strong>BKGetPtr</strong> (void const * object, BKEnum attr, void * outPtr)</var></dt>
 <dd>
 <p>Retreives a pointer or struct attribute.</p>
 
@@ -119,7 +118,7 @@ BKGetPtr (& track, BK_SAMPLE_RANGE, range, sizeof (range));
 - [Context attributes](context/#attributes)
 - [Data attributes](data/#attributes)
 
-## Disposing Object
+## Disposing Objects
 
 When an object is not used anymore, is should be disposed to free its resources. There is a general dispose function `BKDispose` which can be used on all objects.
 
