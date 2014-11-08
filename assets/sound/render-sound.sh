@@ -19,7 +19,7 @@ for line in $(find . -iname '*.blip'); do
 
 	if [[ ! -e $mp3 || bliptime -gt mp3time ]]; then
 		echo "Rendering $blip..."
-		bliplay -o $wav $blip 1&> /dev/null
+		bliplay -yo $wav $blip 1&> /dev/null
 		ffmpeg -loglevel panic -y -i $wav -q:a 1 $mp3
 		unlink $wav
 		let i="$i+1"
