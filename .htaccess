@@ -34,7 +34,7 @@ ExpiresByType image/jpeg      "access plus 1 week"
 ExpiresByType image/gif       "access plus 1 week"
 ExpiresByType image/png       "access plus 1 week"
 ExpiresByType image/svg+xml   "access plus 1 week"
-ExpiresByType text/html       "access plus 1 week"
+ExpiresByType text/html       "access plus 4 hour"
 
 # Allow from all origins
 <IfModule mod_headers.c>
