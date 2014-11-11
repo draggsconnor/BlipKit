@@ -2,13 +2,14 @@
 layout: doc
 title: Download
 order: 3
+description: Build instructions and download page for the BlipKit library. Licensed under the MIT license.
 ---
 
 	$ git clone https://github.com/detomon/BlipKit.git
 
 [https://github.com/detomon/BlipKit](https://github.com/detomon/BlipKit)
 
-##Building the Library
+## Building the Library
 
 First execute `autogen.sh` in the base directory to generate the build system:
 
