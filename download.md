@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Download
+title: Download and Building
 order: 3
 description: Build instructions and download page for the BlipKit library. Licensed under the MIT license.
 ---
