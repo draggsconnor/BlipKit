@@ -79,7 +79,7 @@ BKContextGenerate (& ctx, frames, 512);
 
 ## Creating a Beat
 
-The context object contains a master clock which has a default tick rate of 240 Hz. This *ticks* are the *beat* for all [effects](../effects/), [instruments](../instruments/) and [arpeggio notes](arepggio/). The master clock also has a 0th tick at the very beginning.
+The context object contains a master clock which has a default tick rate of 240 Hz. This *ticks* are the *beat* for all [effects](../effects/), [instruments](../instruments/) and [arpeggio notes](../arepggio/). The master clock also has a 0th tick at the very beginning.
 
 It is recommended to use a beat that is synchronized with the master clock. For this purpose, there are [BKDivider](../clocks-and-dividers/) objects. They reduce the tick rate by a given factor and call a provided callback at specified intervals.
 
