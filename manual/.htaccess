@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteOptions inherit
+
+RewriteRule ^tracks/? /manual/generating-sound/ [R=permanent,L]
+RewriteRule ^samples/? /manual/playing-samples/ [R=permanent,L]
+RewriteRule ^clocks$ /manual/clocks-and-dividers/ [R=permanent,L]
+RewriteRule ^phase-wrap/? /manual/generating-sound/ [R=permanent,L]
+RewriteRule ^arepggio/? /manual/arpeggio/ [R=permanent,L]
+RewriteRule ^envelopes/? /manual/instruments/ [R=permanent,L]
+RewriteRule ^generating-frames/? /manual/generating-sound/ [R=permanent,L]
+
+RewriteRule ^function-reference/context/? /manual/context/ [R=permanent,L]
+RewriteRule ^function-reference/data/? /manual/data/ [R=permanent,L]
+
+RewriteRule ^appendix/? /references/ [R=permanent,L]
+
