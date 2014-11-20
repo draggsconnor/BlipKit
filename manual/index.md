@@ -17,7 +17,7 @@ This is an overview of the library's concept and its basic objects. Objects can 
 
 ## Context Object
 
-[BKContext](context/) is the base object. The number of needed channels is defined at initialization (usually 2 for stereo). The sample rate should match the one which is used to output the audio, otherwise speed and pitch will not match.
+[BKContext](context-object/) is the base object. The number of needed channels is defined at initialization (usually 2 for stereo). The sample rate should match the one which is used to output the audio, otherwise speed and pitch will not match.
 
 {% highlight c %}
 // The context object
@@ -30,7 +30,7 @@ BKContextInit (& ctx, 2, 44100);
 
 ## Track Objects
 
-[BKTrack](tracks/) objects render the audio data, this may be a [waveform](waveforms/) or a [sample](playing-samples/). A waveform type has to be given at initialization which can be changed afterwards, though. Each track generates it own layer of audio data and does not interfere with other tracks.
+[BKTrack](tracks-object/) objects render the audio data, this may be a [waveform](waveforms/) or a [sample](playing-samples/). A waveform type has to be given at initialization which can be changed afterwards, though. Each track generates it own layer of audio data and does not interfere with other tracks.
 
 {% highlight c %}
 // The track object
@@ -114,9 +114,9 @@ BKGetPtr (& track, BK_SAMPLE_RANGE, range, sizeof (range));
 
 </dl>
 
-- [Track attributes](tracks/#attributes)
-- [Context attributes](context/#attributes)
-- [Data attributes](data/#attributes)
+- [Track attributes](track-object/#attributes)
+- [Context attributes](context-object/#attributes)
+- [Data attributes](data-object/#attributes)
 
 ## Disposing Objects
 

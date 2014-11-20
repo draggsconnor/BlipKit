@@ -7,7 +7,7 @@ description: A samples can be loaded from a WAVE file or from raw audio data and
 
 A sample replaces the waveform of a track and is played when a note is set in the corresponding pitch. It can be loaded from a WAVE file or from raw audio data and can contain 1 or more channels. If it contains more than 1 channel, the number of channels must match the context's number of channels, or else it cannot be set to a track and is ignored.
 
-Samples are loaded into the general audio data container [`BKData`](../data/) and can be set to multiple track.
+Samples are loaded into the general audio data container [`BKData`](../data-object/) and can be set to multiple track.
 
 {% highlight c %}
 // Data object to hold the frames
