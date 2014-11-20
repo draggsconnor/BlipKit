@@ -19,7 +19,7 @@ The attributes of the data object.
 <dd>
 
 <p>Sets the object's pitch.</p>
-<p>This attribute is usd to <em>tune</em> the sample. It should be tuned to <code>BK_C_4</code> to represent the correct note.</p>
+<p>This attribute is used to <em>tune</em> the sample. It should be tuned to <code>BK_C_4</code> to represent the correct note.</p>
 <p>When a sample is set to a track, the object's attribute <code>BK_SAMPLE_PITCH</code> is copied to it, so the attribute has to be set before setting the sample.</p>
 
 {% highlight c %}
