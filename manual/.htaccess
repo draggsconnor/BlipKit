@@ -2,6 +2,7 @@ RewriteEngine On
 RewriteOptions inherit
 
 RewriteRule ^tracks/? /manual/generating-sound/ [R=permanent,L]
+RewriteRule ^track/? /manual/generating-sound/ [R=permanent,L]
 RewriteRule ^track-object/? /manual/generating-sound/ [R=permanent,L]
 RewriteRule ^samples/? /manual/playing-samples/ [R=permanent,L]
 RewriteRule ^clocks$ /manual/clocks-and-dividers/ [R=permanent,L]
@@ -14,4 +15,3 @@ RewriteRule ^function-reference/context-object/? /manual/context-object/ [R=perm
 RewriteRule ^function-reference/data-object/? /manual/data-object/ [R=permanent,L]
 
 RewriteRule ^appendix/? /references/ [R=permanent,L]
-
