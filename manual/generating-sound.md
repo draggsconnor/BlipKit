@@ -220,7 +220,7 @@ BKSetPtr (& track, BK_INSTRUMENT, instrument);
 
 <dt><var>BK_SAMPLE</var></dt>
 <dd>
-<p>Sets the <a href="../samples/">sample</a> to play.</p>
+<p>Sets the <a href="../samples/">sample</a> to play. The track has to be attached to a context or else `BKSetPtr` will return `BK_INVALID_STATE`.</p>
 
 {% highlight c %}
 // Sample object declared elsewhere
@@ -244,9 +244,9 @@ BKSetAttr (& track, BK_PITCH, 12 * BK_FINT20_UNIT);
 
 <dt><var>BK_PHASE_WRAP</var></dt>
 <dd>
-<p>Sets the number of frames at which the waveform resets its phase.</p>
+<p>Sets the number of phases at which the waveform is reset.</p>
 <p>This is interesting for the noise waveform <code>BK_NOISE</code>. Other waveforms may sound distorted.</p>
-<p>The value is reset when a new waveform set.</p>
+<p>The value is reset when a new waveform is set.</p>
 
 {% highlight c %}
 // Set noise waveform
@@ -259,8 +259,8 @@ BKSetAttr (& track, BK_PHASE_WRAP, 128);
 
 <dt><var>BK_SAMPLE_RANGE</var></dt>
 <dd>
-<p>Sets the playable frame range of the <a href="../playing-samples/">sample</a>.</p>
-<p>This is an array of two integers, in which the first value defines the start offset, and second one the end offset. The end offset itself is not included in the range.</p>
+<p>Sets the frame range of the <a href="../playing-samples/">sample</a> to play.</p>
+<p>This is an array of two integers, in which the first value defines the start offset, and the second one the end offset. The end offset itself is not included in the range.</p>
 <p>If a offset is negative, it is relative to the sample end + 1. So a value of -1 for the range end will be the sample length.</p>
 <p>The range is reset when a new sample is set.</p>
 
@@ -271,7 +271,7 @@ BKInt range [2] = {6400, 12600};
 BKSetPtr (& track, BK_SAMPLE_RANGE, range, sizeof (range));
 {% endhighlight %}
 
-<p>The sample can be played reversed by switching the two range offset:</p>
+<p>The sample is played backwards by switching the two range offsets:</p>
 
 {% highlight c %}
 BKInt range [2] = {12600, 6400};
@@ -289,22 +289,25 @@ BKSetPtr (& track, BK_SAMPLE_RANGE, range2, sizeof (range2));
 
 <dt><var>BK_SAMPLE_REPEAT</var></dt>
 <dd>
-<p>Loops the sample indefinitely when set to 1 as long as the note is set. Default is 0.</p>
+<p>Loops the sample indefinitely as long as the note is set. If set to <code>BK_REPEAT</code>, the sample is reset to the range start when its end is reached. If set to <code>BK_PALINDROME</code>, the play direction is reversed when the range boundary is reached. Default is <code>BK_NO_REPEAT</code>.</p>
 
 {% highlight c %}
-// Loop sample forever
-BKSetAttr (& track, BK_SAMPLE_REPEAT, 1);
+// Loop sample
+BKSetAttr (& track, BK_SAMPLE_REPEAT, BK_REPEAT);
+
+// Loop sample back and forth
+BKSetAttr (& track, BK_SAMPLE_REPEAT, BK_PALINDROME);
 {% endhighlight %}
 </dd>
 
 <dt><var>BK_SAMPLE_PITCH</var></dt>
 <dd>
 <p>Sets the pitch of the <a href="../samples/">sample</a>. The value is added to the <code>BK_NOTE</code> attribute. Default is 0.</p>
-<p>When setting a new sample, its attributes `BK_SAMPLE_PITCH` is copied.</p>
+<p>When setting a new sample, its attributes <code>BK_SAMPLE_PITCH</code> is copied to the track attribute.</p>
 
 {% highlight c %}
-// Loop sample forever
-BKSetAttr (& track, BK_SAMPLE_REPEAT, 1);
+// Set sample pitch
+BKSetAttr (& track, BK_SAMPLE_PITCH, -0.25 * BK_FINT20_UNIT);
 {% endhighlight %}
 </dd>
 
