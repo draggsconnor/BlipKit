@@ -4,6 +4,7 @@ title: References
 full_title: References
 order: 30
 description: References for sound synthesis and other articles.
+hide_comments: True
 ---
 
 ## Sound Synthesis

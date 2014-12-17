@@ -11,4 +11,10 @@ layout: default
 		{{ content }}
 	</article>
 
+{% if page.hide_comments %}
+{% else %}
+	<div class="say-comment-box"></div>
+	<script type="text/javascript" src="https://monoxid.net/say/js/say.js"></script>
+{% endif %}
+
 </div>

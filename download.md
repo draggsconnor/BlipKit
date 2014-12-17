@@ -3,6 +3,7 @@ layout: doc
 title: Download and Building
 order: 3
 description: Build instructions and download page for the BlipKit library. Licensed under the MIT license.
+hide_comments: True
 ---
 
 	$ git clone https://github.com/detomon/BlipKit.git

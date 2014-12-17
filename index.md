@@ -2,6 +2,7 @@
 layout: doc
 full_title: BlipKit
 order: 0
+hide_comments: True
 ---
 
 BlipKit is a C library for creating the beautiful sound of old [sound chips](http://en.wikipedia.org/wiki/Chiptune).
