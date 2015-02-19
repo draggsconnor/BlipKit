@@ -1,5 +1,5 @@
 # Send UTF-8 as default encoding for text files
-AddDefaultCharset UTF-8
+AddDefaultCharset utf-8
 
 # Content-Type and encoding
 AddType application/vnd.ms-fontobject eot
@@ -36,7 +36,10 @@ ExpiresByType image/png       "access plus 1 week"
 ExpiresByType image/svg+xml   "access plus 1 week"
 ExpiresByType text/html       "access plus 4 hour"
 
-# Allow from all origins
 <IfModule mod_headers.c>
+	# Allow from all origins
 	Header set Access-Control-Allow-Origin "*"
+	Header set Content-Language "en"
 </IfModule>
+
+AddHandler php5-fastcgi .php .php5
