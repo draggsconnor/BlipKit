@@ -3,8 +3,8 @@ title: BlipKit Soundchip Library
 short_title: BlipKit Library
 email: simon@monoxid.net
 description: "BlipKit is a C library for creating the beautiful sound of old soundchips. It generates various waveforms, supports effects and instruments can be used to create envelopes."
-baseurl: "/BlipKit"
-url: "http://detomon.github.io"
+baseurl: ""
+url: "http://blipkit.audio"
 github_username: detomon
 
 # Build settings
