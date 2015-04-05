@@ -21,6 +21,8 @@ navigation:
    url: /examples/
  - title: Download
    url: /download/
+ - title: bliplay
+   url: http://play.blipkit.audio/
 
 gems:
   - jekyll-sitemap
