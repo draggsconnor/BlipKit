@@ -14,6 +14,7 @@ AddType video/mp4                     mp4 m4v
 AddType video/ogg                     ogg ogv
 AddType video/webm                    webm
 AddType text/plain                    blip
+AddType audio/wav                     wav
 AddEncoding                           gzip svgz
 
 # Compression
