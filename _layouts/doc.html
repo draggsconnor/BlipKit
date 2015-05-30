@@ -3,7 +3,9 @@ layout: default
 ---
 <nav class="page-nav">
 	<button class="nav-button">Open page navigation</button>
-	{% include pagetree.html context="/" level = 0 %}
+	<div class="page-nav-content">
+		{% include pagetree.html context="/" level = 0 %}
+	</div>
 </nav>
 <div class="post">
 
