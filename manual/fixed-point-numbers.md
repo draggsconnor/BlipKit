@@ -2,22 +2,25 @@
 layout: doc
 title: Fixed-Point Numbers
 order: 100
-description: Fixed-point numbers are used to represent floating point numbers in form of integers.
+description: In the old days, when hardware didn't (or very slowly) support floating-point calculations, fixed-point numbers were used to represent floating-point numbers in form of integers.
 ---
 
-Fixed-point numbers are used to represent floating point numbers in form of integers. They have some advantages in certain situations. However, the downside is that they are limited to a relatively small value range, depending on the desired precision.
+In the old days, when hardware didn't (or very slowly) supported floating-point calculations, fixed-point numbers were used to represent floating-point numbers in form of integers. They have some advantages, like a constant precision. However, the downside is that their values are limited to a certain range, depending on said precision.
 
 The library defines a type `BKFInt20` and its unsigned variant `BKFUInt20`. This is a 32 bit fixed-point number which has its integer part in the upper 12 bits and the fractional part in the lower 20 bits. Its absolute integer value is 4095 for the unsigned version and 2047 for the signed one, respectively.
 
 {% highlight text %}
 BKFInt20, BKFUInt20
 
-+-------------------------------------------------+
-|                 32 bit integer                  |
-+------------------+------------------------------+
-| int part 12 bits |   fractional part 20 bits    |
-+------------------+------------------------------+
++-------------------------------------------------------------------+
+|                          32 bit integer                           |
++-------------------------+-----------------------------------------+
+|  integer part 12 bits   |         fractional part 20 bits         |
+|                         |                                         |
+| I I I I I I I I I I I I | F F F F F F F F F F F F F F F F F F F F |
++-------------------------+-----------------------------------------+
 {% endhighlight %}
+
 
 ## Calculation Examples
 
@@ -38,11 +41,13 @@ Volume and frame values (amplitudes) are also fixed-point numbers. They are expr
 {% highlight text %}
 BKFrame
 
-+----------------------------------------------------+
-|                   32 bit integer                   |
-+--------------------------+-------------------------+
-|          unused          | fractional part 15 bits |
-+--------------------------+-------------------------+
++-------------------------------------------------------------------+
+|                          32 bit integer                           |
++-----------------------------------+-------------------------------+
+|              unused               |    fractional part 15 bits    |
+|                                   |                               |
+| - - - - - - - - - - - - - - - - - | F F F F F F F F F F F F F F F |
++-----------------------------------+-------------------------------+
 {% endhighlight %}
 
 This allows to multiply two volume or amplitude values and shift the result by 15 bits to the right to get the multiplied value.

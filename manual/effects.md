@@ -9,7 +9,7 @@ Effects are used to "animate" certain track attributes. *Slide* effects "slide" 
 
 Enabling an effect will begin updating the corresponding track attribute over the given time. Setting new values for an effect before its current slide period has finished, will start the new slide period at the current interpolated values.
 
-Disabling an effect before its current slide period has finished will set the slide's end value immediately. Generally, all effects can be disabled by setting their first argument to 0.
+Disabling an effect before its current slide period has finished will set the slide's end value immediately. Generally, all effects can be disabled by setting their time argument to 0.
 
 - [Volume Slide](#volume-slide)
 - [Panning Slide](#panning-slide)

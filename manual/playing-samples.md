@@ -7,7 +7,7 @@ description: A samples can be loaded from a WAVE file or from raw audio data and
 
 A sample replaces the waveform of a track and is played when a note is set in the corresponding pitch. It can be loaded from a WAVE file or from raw audio data and can contain 1 or more channels. If it contains more than 1 channel, the number of channels must match the context's number of channels, or else it cannot be set to a track and is ignored.
 
-Samples are loaded into the general audio data container [`BKData`](../data-object/) and can be set to multiple track.
+Samples are loaded into the general audio data container [`BKData`](../data-object/) and can be atached to multiple track.
 
 {% highlight c %}
 // Data object to hold the frames
@@ -40,7 +40,7 @@ BKSetAttr (& track, BK_NOTE, BK_C_5 * BK_FINT20_UNIT);
 
 ## Normalizing
 
-The function `BKDataNormalize` expands the amplitudes of the sample frames to their maximum value relatively to the highest absolute amplitude. This can be used to increase the volume of a sample to the maximum possible value.
+The function `BKDataNormalize` expands the amplitudes of the sample frames to their maximum possible value relatively to the highest absolute amplitude.
 
 {% highlight c %}
 // Normalize sample frames
@@ -49,9 +49,9 @@ BKDataNormalize (& data);
 
 ## Pitch
 
-The sample rate of samples is ignored when playing them. This means, if a sample has a higher sample rate than the context, it would be played too slow. However, the `BKData` object has an attribute `BK_SAMPLE_PITCH` which can be used to *tune* the sample. The sample should be tuned to `BK_C_4` to represent the correct note.
+Samples are not resampled when loaded from a file. This means, if a sample has a higher sample rate than the context, it would be played too slow. However, the `BKData` object has an attribute `BK_SAMPLE_PITCH` which can be used to *tune* the sample. The sample should be tuned to `BK_C_4` to represent the correct note.
 
-When a sample is set to a track, the sample's attribute `BK_SAMPLE_PITCH` is copied to it, so the attribute has to be set before setting the sample.
+When a sample is attached to a track, the data object's `BK_SAMPLE_PITCH` attribute overwrites the one of the track, so this attribute has to be set before.
 
 {% highlight c %}
 // Tune sample

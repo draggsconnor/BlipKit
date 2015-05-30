@@ -25,8 +25,6 @@ BKTrackInit (& track, BK_SQUARE);
 
 The attribute `BK_MASTER_VOLUME` defines the volume at which the audio data is written into the audio buffer (*mix volume*). It is 0 after initialization and has to be set explicitly. `BK_VOLUME` is used to set the loudness of *notes* and is at its maximum after initialization.
 
-*Actually, the two values are interchangable, as they are multiplied by each other which would give the same result.*
-
 {% highlight c %}
 // Set master volume to 20%
 BKTrackSetAttr (& track, BK_MASTER_VOLUME, 0.2 * BK_MAX_VOLUME);
@@ -35,6 +33,8 @@ BKTrackSetAttr (& track, BK_MASTER_VOLUME, 0.2 * BK_MAX_VOLUME);
 // The final volume is 10%
 BKTrackSetAttr (& track, BK_VOLUME, 0.5 * BK_MAX_VOLUME);
 {% endhighlight %}
+
+*Actually, the two values are interchangable, as they are multiplied by each other which would give the same result.*
 
 ## Playing Notes
 
@@ -71,19 +71,17 @@ BKFrame frames [512 * 2];
 // Generate 512 frames e.g. as they would be requested by an audio output function
 // Subsequent calls to this function generates the next requested number of frames
 BKContextGenerate (& ctx, frames, 512);
-
-// The channels are interlaced into the buffer in the form: LRLR...
-// Which means that the first frame of the left channel is at frames[0],
-// the first frame of the right channel at frames[1] and so on
 {% endhighlight %}
+
+Multiple channels are interleaved into the provided buffer. Which means that the first frame of the left channel is at `frames[0]`, the first frame of the right channel at `frames[1]` and so on.
 
 ## Creating a Beat
 
-The context object contains a master clock which has a default tick rate of 240 Hz. This *ticks* are the *beat* for all [effects](../effects/), [instruments](../instruments/) and [arpeggio notes](../arepggio/). The master clock also has a 0th tick at the very beginning.
+The context object runs a master clock which has a default tick rate of 240 Hz. This *ticks* are the heartbeat for all [effects](../effects/), [instruments](../instruments/) and [arpeggio notes](../arepggio/) and update their values.
 
-It is recommended to use a beat that is synchronized with the master clock. For this purpose, there are [BKDivider](../clocks-and-dividers/) objects. They reduce the tick rate by a given factor and call a provided callback at specified intervals.
+It is recommended to use a beat that is synchronized with the master clock. For this purpose, there are [BKDivider](../clocks-and-dividers/) objects. They reduce the tick rate of a clock by a given factor and call a provided callback at the specified interval.
 
-For example, initializing a divider object with a value of 24, will call its callback at every 24th tick of the master clock, and once at the 0th tick.
+For example, initializing a divider object with a value of 24, will call its callback at every 24th tick of the master clock.
 
 {% highlight c %}
 // Divider object
@@ -119,6 +117,8 @@ BKEnum dividerCallback (BKCallbackInfo * info, void * userInfo)
 	return 0;
 }
 {% endhighlight %}
+
+Every clock and divider also has a `0th` tick at the very beginning, which can be used to initialize the track's values for the first time.
 
 ## Attributes
 
