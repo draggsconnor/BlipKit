@@ -7,7 +7,7 @@ baseurl: ""
 url: "http://blipkit.audio"
 github_username: detomon
 
-exclude: [Gruntfile.js, package.json, node_modules, "*.sketch", "assets/**/*.wav", "assets/**/*.blip"]
+exclude: [Gruntfile.js, package.json, node_modules, "*.sketch", "assets/**/*.wav", "assets/**/*.blip", "monoxid-icon-font"]
 
 # Build settings
 markdown: kramdown

@@ -1,0 +1,3 @@
+[submodule "monoxid-icon-font"]
+	path = monoxid-icon-font
+	url = https://bitbucket.org/detomon/monoxid-icon-font.git
