@@ -1,31 +1,11 @@
 /* @group Icons */
 
 .monoxidicon {
-	font-family: monoxidiconsregular, sans-serif;
 	color: #303030;
 	display: inline-block;
-	text-rendering: auto;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 
 	&.title {
 		text-indent: -9999px;
-	}
-
-	&.circle-monoxid:before {
-		content: "\2460";
-	}
-
-	&.circle-github:before {
-		content: "\2461";
-	}
-
-	&.circle-soudcloud:before {
-		content: "\2462";
 	}
 }
 
