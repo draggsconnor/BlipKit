@@ -5,7 +5,7 @@ order: 100
 description: In the old days, when hardware didn't (or very slowly) support floating-point calculations, fixed-point numbers were used to represent floating-point numbers in form of integers.
 ---
 
-In the old days, when hardware didn't (or very slowly) supported floating-point calculations, fixed-point numbers were used to represent floating-point numbers in form of integers. They have some advantages, like a constant precision. However, the downside is that their values are limited to a certain range, depending on said precision.
+In the old days, when hardware did not (or very slowly) supported floating-point calculations, fixed-point numbers were used to represent floating-point numbers in form of integers. They have some advantages, like a constant precision. However, the downside is that their values are limited to a certain range, depending on said precision.
 
 The library defines a type `BKFInt20` and its unsigned variant `BKFUInt20`. This is a 32 bit fixed-point number which has its integer part in the upper 12 bits and the fractional part in the lower 20 bits. Its absolute integer value is 4095 for the unsigned version and 2047 for the signed one, respectively.
 
