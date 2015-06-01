@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
 		uglify: {
 			build: {
-				src: ['js/*.js', '!js/main.min.js'],
+				src: ['bower_components/u.js/dist/u.js', 'bower_components/u.js/dist/u.ie9.js', 'js/*.js', '!js/main.min.js'],
 				dest: 'js/main.min.js'
 			}
 		},

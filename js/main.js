@@ -1,78 +1,78 @@
 $(function () {
 
-	$(".nav-button").click(function () {
-		$(this).parents(".page-nav").toggleClass("open");
+	$('.nav-button').on('click', function () {
+		$(this).parents('.page-nav').toggleClass('open');
 	});
 
 	var soundInstances = {};
 
-	$(".player .button").click(function (e) {
+	$('.player .button').on('click', function (e) {
 		e.preventDefault();
 
 		var $this   = $(this);
-		var $parent = $this.parents(".player");
-		var href    = $this.attr("href");
-		var volume  = parseFloat($parent.data("volume") || 0.5);
-		var soundid = $parent.data("soundid");
-		var state   = $parent.data("state") || "";
+		var $parent = $this.parents('.player');
+		var href    = $this.attr('href');
+		var volume  = parseFloat($parent.data('volume') || 0.5);
+		var soundid = $parent.data('soundid');
+		var state   = $parent.data('state') || '';
 		var instance;
 
-		if (state == "playing") {
+		if (state == 'playing') {
 			instance = soundInstances[soundid];
 			instance.stop();
 			complete();
 			return;
 		}
-		else if (state != "") {
+		else if (state != '') {
 			return;
 		}
 
 		function loading() {
-			$parent.data("state", "loading");
-			$parent.addClass("loading");
+			$parent.data('state', 'loading');
+			$parent.addClass('loading');
 		}
 
 		function play() {
-			$parent.data("state", "playing");
-			$parent.removeClass("loading").addClass("playing");
+			$parent.data('state', 'playing');
+			$parent.removeClass('loading').addClass('playing');
 		}
 
 		function complete() {
-			$parent.data("state", "");
-			$parent.removeClass("playing");
+			$parent.data('state', '');
+			$parent.removeClass('playing');
 		}
 
 		function error() {
-			$parent.data("state", "error");
-			$parent.removeClass("loading").addClass("error");
+			$parent.data('state', 'error');
+			$parent.removeClass('loading').addClass('error');
 		}
 
 		if (!soundid) {
-			soundid = "sound" + (new Date()).getTime() + parseInt(Math.random() * 1000);
-			$parent.data("soundid", soundid);
+			soundid = 'sound' + (new Date()).getTime() + parseInt(Math.random() * 1000);
+			$parent.data('soundid', soundid);
 		}
 
 		if (soundInstances[soundid]) {
 			instance = soundInstances[soundid];
-			instance.play("sound", {volume: volume});
+			instance.play('sound', {volume: volume});
 			play();
 		}
 		else {
 			var queue = new createjs.LoadQueue();
 			queue.installPlugin(createjs.Sound);
 
-			queue.addEventListener("fileload", function(e) {
+			queue.addEventListener('fileload', function(e) {
 				instance = createjs.Sound.play(soundid, {volume: volume});
 				soundInstances[soundid] = instance;
 
-				instance.addEventListener("complete", function(e) {
+				instance.addEventListener('complete', function(e) {
 					complete();
 				});
 
 				play();
 			});
 
-			queue.addEventListener("error", function(e) {
+			queue.addEventListener('error', function(e) {
 				error();
 			});
 
@@ -85,17 +85,10 @@ $(function () {
 	});
 
 	// wrap tabs in span
-	$("pre").each(function () {
+	$('pre').each(function () {
 		var html = $(this).html();
-		html = html.replace(/\t/g, "<span class=\"tab\">\t</span>");
+		html = html.replace(/\t/g, '<span class="tab">\t</span>');
 		$(this).html(html);
-	});
-
-	$("a[href*='#']").click(function () {
-		var href = $(this).attr("href");
-		if (href.substring(0, 1) == "#")
-			href = window.location.pathname + href;
-		ga('send', 'pageview', href);
 	});
 
 });
