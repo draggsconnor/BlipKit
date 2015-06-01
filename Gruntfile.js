@@ -1,6 +1,5 @@
 module.exports = function(grunt) {
 
-	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
@@ -24,6 +23,18 @@ module.exports = function(grunt) {
 			},
 		},
 
+		dataUri: {
+			dist: {
+				src: ['_site/css/*.css'],
+				dest: '_site/css',
+				options: {
+					target: ['_site/css/img/*.*'],
+					fixDirLevel: true,
+					maxBytes : 2048
+				}
+			}
+		},
+
 		'sftp-deploy': {
 			build: {
 				auth: {
@@ -39,16 +50,25 @@ module.exports = function(grunt) {
 		}
 	});
 
-	// plugin tasks
+	grunt.loadNpmTasks('grunt-data-uri');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-jekyll');
 	grunt.loadNpmTasks('grunt-sftp-deploy');
 
-	// Default task(s).
-	grunt.registerTask('default', [
+	grunt.registerTask('build', [
 		'uglify',
 		'jekyll:build',
+		'dataUri'
+	]);
+
+	grunt.registerTask('server', [
+		'build',
+		'jekyll:server'
+	]);
+
+	grunt.registerTask('deploy', [
+		'build',
 		'sftp-deploy'
 	]);
 
