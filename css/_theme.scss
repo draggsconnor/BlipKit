@@ -1,5 +1,15 @@
 /* @group Theme */
 
+body,
+.site-header,
+.site-footer {
+	background: url(img/lines-gray.svg) center top fixed;
+}
+
+.main-wrapper {
+	background: white;
+}
+
 strong {
 	font-weight: 600;
 }
