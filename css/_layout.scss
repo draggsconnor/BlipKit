@@ -103,7 +103,7 @@ nav {
 	position: relative;
 	z-index: 1;
 
-	& + .post {
+	& + .container {
 		margin-right: 13em;
 	}
 
@@ -167,16 +167,6 @@ nav {
 			}
 		}
 	}
-}
-
-.post-header {
-	h1 {
-		margin-top: 0;
-	}
-}
-
-.say-comment-box {
-	margin-top: 3em;
 }
 
 /* @end */

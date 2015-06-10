@@ -1,0 +1,52 @@
+.player {
+	margin: 0.5em;
+	vertical-align: middle;
+	@include display-inline();
+
+	.button {
+		width: 1em;
+		height: 1em;
+		margin: 0;
+		padding: 0;
+		background: #404040 url(img/player.svg);
+		border-radius: 0.5em;
+		background-size: 300% 100%;
+		background-position: -100% 0%;
+		font-size: 3em;
+		text-indent: -9999px;
+		@include display-inline();
+
+		&:hover {
+			background-color: #202020;
+		}
+
+		& + .label {
+			margin-top: 0.2em;
+		}
+
+		.label + & {
+			margin-bottom: 0.2em;
+		}
+	}
+
+	&.loading {
+		.button {
+			background-color: #404040;
+			background-position: -150% 0%;
+		}
+	}
+
+	&.playing {
+		.button {
+			background-color: #202020;
+			background-position: -50% 0%;
+		}
+	}
+
+	&.error {
+		.button {
+			background-color: #7f0000;
+			background-position: 0% 0%;
+		}
+	}
+}
