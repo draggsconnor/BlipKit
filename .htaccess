@@ -63,3 +63,10 @@ RewriteCond %{SERVER_NAME} ^blipkit.monoxid.net$
 RewriteRule ^(.*)$ http://blipkit.audio/$1 [R=permanent,QSA,L]
 
 AddHandler php5-fastcgi .php .php5
+
+# block
+RewriteCond %{HTTP_REFERER} success-seo.com [NC]
+RewriteCond %{HTTP_REFERER} 100dollars-seo.com [NC,OR]
+RewriteCond %{HTTP_REFERER} videos-for-your-business.com [NC,OR]
+RewriteCond %{HTTP_REFERER} semaltmedia.com [NC,OR]
+RewriteRule .* - [F]
