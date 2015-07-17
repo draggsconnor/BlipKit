@@ -1,8 +1,8 @@
 /*!
- * u.js - Version 0.8.2
+ * u.js - Version 0.14.0
  * micro framework, utility library
  * Author: Steve Ottoz <so@dev.so>
- * Build date: 2015-05-22
+ * Build date: 2015-07-16
  * Copyright (c) 2015 Steve Ottoz
  * Released under the MIT license
  */
@@ -25,15 +25,24 @@
    * @return {(object|undefined)}             instance or execute function on dom ready
    */
   win.u = function(arg) {
-    return /^f/.test(typeof arg) ? /c/.test(doc.readyState) ? arg() : u(doc).on('DOMContentLoaded', arg) : new Init(arg);
+    return /^f/.test(typeof arg) ? /c/.test(doc.readyState) ? arg() : u._defInit.push(arg) : new Init(arg);
   };
+
+
+  /**
+   * u _defInit
+   * list of deferred intializer functions
+   * will be called in the given order on DOMContentLoaded and emptied afterwards
+   * @type {array}
+   */
+  u._defInit = [];
 
 
   /**
    * u version
    * @type {string}
    */
-  u.version = '0.8.2';
+  u.version = '0.14.0';
 
 
   /**
@@ -48,6 +57,13 @@
      * @type {number}
      */
     length: 0,
+
+
+    /**
+     * u.js object identifier
+     * @type {string}
+     */
+    ujs: '0.14.0',
 
 
     /**
@@ -488,22 +504,80 @@
 
 
     /**
+     * index method
+     * get the index of an element
+     * @param  {object|string} [el] - elements or css selector
+     * @return {number}               index
+     */
+    index: function(el) {
+      if (!el) {
+    		return this[0] ? this.first().prevAll().length : -1;
+    	}
+    	if (''+el === el) {
+    		return u.toArray(u(el)).indexOf(this[0]);
+    	}
+      el = el.ujs ? el[0] : el;
+    	return u.toArray(this).indexOf(el);
+    },
+
+
+    /**
      * prev method
      * get previous element sibling
-     * @return {object} sibling element
+     * @param  {string} [sel] - selector to filter siblings
+     * @return {object}         sibling element
      */
-    prev: function() {
-      return u(this[0].previousElementSibling);
+    prev: function(sel) {
+      return u(u.toArray(this.prevAll(selector)).shift());
+    },
+
+
+    /**
+     * prevAll method
+     * get all previous element siblings
+     * @param  {string} [sel] - selector to filter siblings
+     * @return {object}         sibling elements
+     */
+    prevAll: function(sel) {
+      var matched = [],
+    	 		el = this[0];
+
+    	while (el = el.previousElementSibling) {
+    		sel ?
+    			(u(el).is(sel) && matched.push(el)) :
+    			matched.push(el);
+    	}
+    	return u(matched);
     },
 
 
     /**
      * next method
      * get next element sibling
-     * @return {object} sibling element
+     * @param  {string} [sel] - selector to filter siblings
+     * @return {object}         sibling element
      */
-    next: function() {
-      return u(this[0].nextElementSibling);
+    next: function(sel) {
+      return u(u.toArray(this.nextAll(sel)).shift());
+    },
+
+
+    /**
+     * nextAll method
+     * get all next element siblings
+     * @param  {string} [sel] - selector to filter siblings
+     * @return {object}         sibling elements
+     */
+    nextAll: function(sel) {
+      var matched = [],
+    	 		el = this[0];
+
+    	while (el = el.nextElementSibling) {
+    		sel ?
+    			(u(el).is(sel) && matched.push(el)) :
+    			matched.push(el);
+    	}
+    	return u(matched);
     },
 
 
@@ -724,6 +798,18 @@
 
 
     /**
+     * extend method
+     * extend the u.js prototype object
+     * @return {object} u.js prototype
+     */
+    extend: function() {
+      var args = u.toArray(arguments);
+      args.unshift(u.fn);
+      return u.extend.apply(this, args);
+    },
+
+
+    /**
      * for some reason is needed to get an array-like
      * representation instead of an object
      */
@@ -758,7 +844,7 @@
    * @param  {string} cls  - class name
    * @return {object} this
    */
-  props.forEach(function(prop, index) {
+  u.each(props, function(index, prop) {
     u[proto][prop] = function(cls) {
       return this.each(function(i, el) {
         var classes =  cls.split(' ');
@@ -783,24 +869,25 @@
 
   /**
    * extend function
-   * extend an object by another object
-   * @param  {object} base  - object to be extended or object to extend u.fn by
-   * @param  {object} [ext] - object to extend by
+   * extend an object by any number of objects
+   * @param  {object} base  - object to be extended or to extend u.js namespace
    * @return {object}         extended object
    */
-  u.extend = u.fn.extend = function(base, ext){
-    var result = {},
+  u.extend = function(base){
+    var args = arguments,
+        i,
         prop;
 
-    arguments[1] || (ext = base, base = result = u.fn);
+    args[1] || (args[1] = base, base = u);
 
-    for(prop in base) {
-      result[prop] = (ext[prop] === undef) ? base[prop] : ext[prop];
+    for (i in args) {
+      if (i > 0) {
+        for(prop in args[i]) {
+          base[prop] = args[i][prop];
+        }
+      }
     }
-    for(prop in ext) {
-      result[prop] = ext[prop];
-    }
-    return result;
+    return base;
   };
 
 
@@ -811,11 +898,22 @@
    * @param  {*}      b - argument to pass to the method
    * @return {object}
    */
-  "push pop shift unshift filter map splice".split(" ").forEach(function(m) {
+  u.each("push pop shift unshift filter map splice".split(" "), function(i,m) {
     u[m] = function(a, b) {
       return a[m](b);
     };
   });
+
+
+  /**
+   * type function
+   * get the type of an object
+   * @param  {*}      obj - object to check
+   * @return {string}       type of the object
+   */
+  u.type = function(obj) {
+    return Object.prototype.toString.call(obj).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
+  };
 
 
   /**
@@ -1021,7 +1119,7 @@
       function(tmp, val){
         tmp = obj;
         val.replace(/[^.]+/g,function(key){
-          tmp = tmp[key];
+          tmp = tmp[key] || '';
         });
         return tmp;
       }
@@ -1079,22 +1177,24 @@
         if (xhr.readyState === 4) {
           if (xhr.status >= 200 && xhr.status < 400){
             // call success callback
-            opts.success(u.parse(xhr.response), xhr.statusText);
+            opts.success(u.parse(xhr.response || xhr.responseText), xhr.statusText);
           }
           else {
             // call error callback
-            opts.error(u.parse(xhr.response), xhr.statusText);
+            opts.error(u.parse(xhr.response || xhr.responseText), xhr.statusText);
           }
         }
       };
 
-      // XMLHttpRequest upload progress function
-      xhr.upload.onprogress = function(event) {
-        if (event.lengthComputable) {
-          // call progress callback
-          opts.up(event.total, event.loaded);
-        }
-      };
+      if (xhr.upload) {
+        // XMLHttpRequest upload progress function
+        xhr.upload.onprogress = function(event) {
+          if (event.lengthComputable) {
+            // call progress callback
+            opts.up(event.total, event.loaded);
+          }
+        };
+      }
 
       // XMLHttpRequest download progress function
       xhr.onprogress = function(event) {
@@ -1108,7 +1208,10 @@
       xhr.open(method, opts.url, opts.sync);
       xhr.setRequestHeader('Content-type', (opts.json ? cts.json : cts.form));
       xhr.setRequestHeader('Accept', cts.json);
-      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+      opts.headers && u.each(opts.headers, function(header, value) {
+        xhr.setRequestHeader(header, value);
+      });
 
       // if set, send authorization header
       if (opts.auth) {
@@ -1129,7 +1232,7 @@
      * @return {undefined}
      */
     defaults: function(opts) {
-      this.opts = u.extend(this.opts, opts);
+      this.opts = u.extend({}, this.opts, opts);
     }
   };
 
@@ -1141,7 +1244,7 @@
    * @return {object} xhr  - xhr object
    */
   u.get = function(opts) {
-    opts = u.extend(u.ajax.opts, opts);
+    opts = u.extend({}, u.ajax.opts, opts);
     opts.json = false;
     opts.url += '?' + (u.param(opts.data) || '');
     return u.ajax._send(opts, 'GET');
@@ -1155,12 +1258,28 @@
    * @return {object} xhr  - xhr object
    */
   var methods = ['post', 'put', 'patch', 'options', 'delete'];
-  methods.forEach(function(method, index) {
+  u.each(methods, function(index, method) {
     u[method] = function(opts) {
-      opts = u.extend(u.ajax.opts, opts);
+      opts = u.extend({}, u.ajax.opts, opts);
       return u.ajax._send(opts, method.toUpperCase());
     };
   });
+
+
+  /**
+   * getScript Function
+   * load a script into global scope
+   * @param  {[type]}   url      [description]
+   * @param  {Function} callback [description]
+   * @return {[type]}            [description]
+   */
+  u.getScript = function(url, callback) {
+		var script = doc.createElement('script');
+
+		script.onload = callback || function(){};
+		script.src = url;
+    doc.head.appendChild(script).parentNode.removeChild(script);
+	};
 
 
   /**
@@ -1218,14 +1337,27 @@
    */
   win.µ = u;
 
+
+  /**
+   * DOMContentLoaded function calls
+   * call functions registered with u(func)
+   */
+  u(doc).on('DOMContentLoaded', function (e) {
+    for (var i in u._defInit) {
+      u._defInit[i](e);
+    }
+    u._defInit = [];
+  });
+
+
 })(window, document, [], 'prototype');
 
 
 /*!
- * u.js - Version 0.8.2 - IE 9 fix
+ * u.js - Version 0.14.0 - IE 9 fix
  * Fix for the missing classList in IE 9
  * Author: Steve Ottoz <so@dev.so>
- * Build date: 2015-05-22
+ * Build date: 2015-07-16
  * Copyright (c) 2015 Steve Ottoz
  * Released under the MIT license
  */
@@ -1234,67 +1366,78 @@
 
 
   /**
-   * overwrite class methods if classList is not defined
+   * wait for body to be available
+   * insert function call at beginning of list to execute it before any other registered function
    */
-  if (!document.body.classList) {
+  u(function () {
 
 
     /**
-     * hasClass method
-     * check if element has class
-     * @param  {string}  cls - class name to check for
-     * @return {boolean}
+     * overwrite class methods if classList is not defined
      */
-    u.fn.hasClass = function(cls) {
-      return new RegExp('(^| )' + cls + '( |$)', 'gi').test(this[0].className);
-    };
+    if (!document.body.classList) {
 
 
-    /**
-     * addClass method
-     * @param  {string} cls  - class name
-     * @return {object} this
-     */
-    u.fn.addClass = function(cls) {
-      return this.each(function(el) {
-        el.className += ' ' + cls;
-      });
-    };
+      /**
+       * hasClass method
+       * check if element has class
+       * @param  {string}  cls - class name to check for
+       * @return {boolean}
+       */
+      u.fn.hasClass = function(cls) {
+        return new RegExp('(^| )' + cls + '( |$)', 'gi').test(this[0].className);
+      };
 
 
-    /**
-     * removeClass method
-     * @param  {string} cls  - class name
-     * @return {object} this
-     */
-    u.fn.removeClass = function(cls) {
-      return this.each(function(el) {
-        el.className = el.className.replace(new RegExp('(^|\\b)' + cls.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-      });
-    };
+      /**
+       * addClass method
+       * @param  {string} cls  - class name
+       * @return {object} this
+       */
+      u.fn.addClass = function(cls) {
+        return this.each(function(i, el) {
+          el.className += ' ' + cls;
+        });
+      };
 
 
-    /**
-     * toggleClass method
-     * @param  {string} cls  - class name
-     * @return {object} this
-     */
-    u.fn.toggleClass = function(cls) {
-      return this.each(function(el) {
-        var classes = el.className.split(' '),
-            existingIndex = classes.indexOf(cls);
+      /**
+       * removeClass method
+       * @param  {string} cls  - class name
+       * @return {object} this
+       */
+      u.fn.removeClass = function(cls) {
+        return this.each(function(i, el) {
+          el.className = el.className.replace(new RegExp('(^|\\b)' + cls.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+        });
+      };
 
-        if (existingIndex >= 0) {
-          classes.splice(existingIndex, 1);
-        }
-        else {
-          classes.push(cls);
-        }
 
-        el.className = classes.join(' ');
-      });
-    };
+      /**
+       * toggleClass method
+       * @param  {string} cls  - class name
+       * @return {object} this
+       */
+      u.fn.toggleClass = function(cls) {
+        return this.each(function(i, el) {
+          var classes = el.className.split(' '),
+              existingIndex = classes.indexOf(cls);
 
-  }
+          if (existingIndex >= 0) {
+            classes.splice(existingIndex, 1);
+          }
+          else {
+            classes.push(cls);
+          }
+
+          el.className = classes.join(' ');
+        });
+      };
+
+    }
+
+
+  });
+
 
 })(u,window,document);

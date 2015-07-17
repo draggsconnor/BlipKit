@@ -469,22 +469,76 @@ Returns a u object with child elements.
 u('selector').children() // u object
 ```
 
-### .prev()
-Get previous sisbling element.
+### .index(element)
+Get the 0 based index of an element. 
+
+If no argument is passed, returns the index of the first element in the current u object relative to all sibling elements.
+
+If a selector is passed, returns the index of the first element in the current u object relative to all elements matching the selector.
+
+If an element is passed (u object or DOM element), returns the index of the first passed element relative to the current u object.
+
+| Parameter | Type | Description |
+|---|---|---|
+| element | object, string | **Optional**. An element or a css selector |
+
+```javascript
+u('selector').index() // element index
+u('selector').index('other-selector') // element index
+u('selector').index(u('other-selector')) // element index
+```
+
+
+### .prev(selector)
+Get previous sisbling element. Optionally matching a css selector.
 
 Returns a u object with the previous sibling element.
+
+| Parameter | Type | Description |
+|---|---|---|
+| selector | string | **Optional**. A css selector |
 
 ```javascript
 u('selector').prev() // u object
 ```
 
-### .next()
-Get next sisbling element.
+### .prevAll(selector)
+Get all previous sisbling elements. Optionally matching a css selector.
+
+Returns a u object with the previous sibling elements.
+
+| Parameter | Type | Description |
+|---|---|---|
+| selector | string | **Optional**. A css selector |
+
+```javascript
+u('selector').prevAll() // u object
+```
+
+### .next(selector)
+Get next sisbling element. Optionally matching a css selector.
 
 Returns a u object with the next sibling element.
 
+| Parameter | Type | Description |
+|---|---|---|
+| selector | string | **Optional**. A css selector |
+
 ```javascript
 u('selector').next() // u object
+```
+
+### .next(selector)
+Get all next sisbling elements. Optionally matching a css selector.
+
+Returns a u object with the next sibling elements.
+
+| Parameter | Type | Description |
+|---|---|---|
+| selector | string | **Optional**. A css selector |
+
+```javascript
+u('selector').nextAll() // u object
 ```
 
 ### .siblings(selector)
@@ -700,19 +754,23 @@ Returns the string.
 u.trim('blabla ') // 'blabla'
 ```
 
-### u.extend(base, extension)
-Create a new object by extending the base object with the extension object.
+### u.extend(base)
+Extending the base object with any number of extension objects.
+If only one argument is passed, the u.js namespace is extended, otherwise the first object is extended by the following objects.
 
-Returns a new object.
+Returns the extended object.
 
 | Parameter | Type | Description |
 |---|---|---|
 | base | object | The base object. |
-| extension | object | The extension object. |
 
 ```javascript
 u.extend({key: 'value'}, {key: 'newvalue', newKey: 'value'}) // {key: 'newvalue', newKey: 'value}
 ```
+
+#### u.fn.extend()
+Use `u.fn.extend({...})` to extend the u.js prototype, i.e. for plugins.
+
 
 ### u.push(array, argument), u.pop(array, argument), u.shift(array, argument), u.unshift(array, argument), u.filter(array, argument), u.map(array, argument), u.splice(array, argument)
 Array methods.
@@ -950,6 +1008,7 @@ u.js AJAX functions all work pretty much the same. You call the function and pas
 | sync | boolean | **Optional**. Sync or Async. **Default true**. |
 | json | boolean | **Optional**. Send as JSON or form encoded. **Default true**. |
 | auth | string | **Optional**. String passed in the Authorization HTTP header. **Default null** |
+| headers | object | **Optional**. Object containing additional HTTP headers. |
 | success | function(data, status) | Success handler function. |
 | error | function(data, status) | Error handler function. |
 | up | function(total, loaded) | Upload progress handler function. |
@@ -962,6 +1021,10 @@ u.post({
 	sync: true,
 	json: true,
 	auth: 'Bearer token',
+	headers: {
+		'X-Requested-With': 'XMLHttpRequest',
+		'a-custom-hader': 'with a custom value'
+	},
 	success: function(data, status) {
 		// do something
 	},
@@ -979,6 +1042,23 @@ u.post({
 	},
 	url: 'http://example.com'
 })
+```
+
+#### u.getScript(url, callback)
+Load a script into global scope.
+
+| Parameter | Type | Description |
+|---|---|---|
+| url | function | The url of the script to load. |
+| callback | function(**event**) | **Optional**. Callback function for the onload event. |
+
+```javascript
+// i.e. load Google Maps script when needed
+u.getScript('https://www.google.com/jsapi', function() {
+	google.load('maps', '3.9', { other_params: 'sensor=false', callback: function() {
+		// google maps setup
+	}});
+});
 ```
 
 ---

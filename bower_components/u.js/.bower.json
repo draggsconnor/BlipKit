@@ -1,6 +1,6 @@
 {
   "name": "u.js",
-  "version": "0.8.2",
+  "version": "0.14.0",
   "description": "micro framework, utility library",
   "repository": {
     "type": "git",
@@ -34,14 +34,14 @@
     "jQuery",
     "ki.js"
   ],
-  "_release": "0.8.2",
+  "_release": "0.14.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.8.2",
-    "commit": "329a382973c1fd6f76255007876f7b7a8249d9a4"
+    "tag": "0.14.0",
+    "commit": "fd8ebbc9eec962dbe127ffe1f164f6eeeb63ad90"
   },
   "_source": "git://github.com/iamso/u.js.git",
-  "_target": "~0.8.2",
+  "_target": "~0.14.0",
   "_originalSource": "u.js",
   "_direct": true
 }
