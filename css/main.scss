@@ -1,9 +1,14 @@
 ---
 ---
 
+@import url(https://monoxid.net/static/fonts/open-sans/basic.css);
+@import url(https://monoxid.net/static/fonts/fira-mono/monospace.css);
+@import url(https://monoxid.net/static/fonts/monoxid-icons/all.css);
+
 $line-height: 1.66em;
+$code-line-height: 1.33em;
 $body-font: normal 13pt open-sans, "Helvetica Neue", sans-serif;
-$code-font: normal #{0.95em}/#{$line-height} "fira-mono", "Andale Mono", Consolas, monospace;
+$code-font: normal #{0.95em}/#{$code-line-height} "fira-mono", "Andale Mono", Consolas, monospace;
 $print-font: normal normal 8pt open-sans, "Helvetica Neue", sans-serif;
 $text-color: #202020;
 $back-color: #404040;
