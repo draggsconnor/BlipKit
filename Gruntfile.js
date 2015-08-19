@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 				options: {
 					target: ['_site/css/img/*.*'],
 					fixDirLevel: true,
-					maxBytes : 2048
+					maxBytes : 4096
 				}
 			}
 		},
