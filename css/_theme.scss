@@ -2,8 +2,13 @@
 
 body,
 .site-header,
-.site-footer {
+.site-footer,
+figure {
 	background: url(img/lines-gray.svg) center top fixed;
+}
+
+figure {
+	background-attachment: local;
 }
 
 .main-wrapper {
@@ -73,7 +78,7 @@ strong .button {
 
 .buttons {
 	padding: 1em;
-	background: url(img/lines-gray.svg) center top fixed;
+	background: url(img/lines-gray.svg) center top local;
 
 	* + & {
 		margin-top: $line-height;
