@@ -67,7 +67,7 @@ BKTrackAttach (& track, & ctx);
 // two times the size than number of frames are requested
 BKFrame frames [512 * 2];
 
-// Generate 512 frames e.g. as they would be requested by an audio output function
+// Generate 512 frames, e.g., as they would be requested by an audio output function
 // Subsequent calls to this function generate the next requested number of frames
 BKContextGenerate (& ctx, frames, 512);
 
