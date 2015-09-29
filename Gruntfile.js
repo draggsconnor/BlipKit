@@ -35,6 +35,23 @@ module.exports = function(grunt) {
 			}
 		},
 
+		postcss: {
+			options: {
+				map: {
+					inline: false,
+					annotation: '_site/css/'
+				},
+				processors: [
+					require('pixrem')(),
+					require('autoprefixer')({browsers: 'last 5 versions'}),
+					require('cssnano')()
+				]
+			},
+			dist: {
+				src: '_site/css/*.css'
+			}
+		},
+
 		'sftp-deploy': {
 			build: {
 				auth: {
@@ -52,6 +69,7 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-data-uri');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-jekyll');
 	grunt.loadNpmTasks('grunt-sftp-deploy');
@@ -59,7 +77,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 		'uglify',
 		'jekyll:build',
-		'dataUri'
+		'dataUri',
+		'postcss'
 	]);
 
 	grunt.registerTask('server', [
