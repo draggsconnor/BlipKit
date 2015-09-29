@@ -2,3 +2,5 @@
 _site
 .sass-cache
 .ftppass
+*.map
+js/main.min.js
