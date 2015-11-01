@@ -15,8 +15,7 @@ BlipKit is a C library for creating the beautiful sound of old [sound chips](htt
 * Load multi-channel [samples](manual/samples/) and play them at different pitches
 
 <p class="buttons">
-	<strong><a href="examples/" class="button">Examples</a></strong>
-	<strong><a href="manual/" class="button">Read manual</a></strong>
+	<strong><a href="manual/" class="button">Manual</a></strong>
 	<a href="download/" class="button">Download</a>
 </p>
 
@@ -75,7 +74,3 @@ BKContextGenerate (& ctx, frames, 512);
 // Which means that the first frame of the left channel is at frames[0],
 // the first frame of the right channel at frames[1] and so on
 {% endhighlight %}
-
-- [Read manual](manual/)
-- [More examples](examples/)
-- [Download BlipKit](download/)
