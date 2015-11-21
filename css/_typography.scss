@@ -1,9 +1,5 @@
 /* @group Typography */
 
-@import url(https://monoxid.net/static/fonts/open-sans/basic.css);
-@import url(https://monoxid.net/static/fonts/fira-mono/monospace.css);
-@import url(https://monoxid.net/static/fonts/monoxid-icons/all.css);
-
 body,
 button,
 input,
@@ -21,12 +17,12 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	margin-top: #{$line-height / 3};
-	font-size: 3em;
+	font-size: 2.6em;
 }
 
 h2 {
 	margin-top: #{$line-height / 1.6};
-	font-size: 2.4em;
+	font-size: 2.2em;
 }
 
 h3 {
@@ -37,10 +33,9 @@ h3 {
 h4 {
 	margin-top: #{$line-height / 1.2};
 	font-size: 1.2em;
-	font-weight: 600;
 }
 
-p, ol, ul, blockquote, pre {
+p, ol, ul, blockquote, pre, .paragraph {
 	line-height: $line-height;
 	margin-top: $line-height;
 	margin-bottom: 0;

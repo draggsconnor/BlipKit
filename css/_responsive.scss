@@ -43,3 +43,48 @@
 	}
 
 }
+
+@media only screen and (max-width: 50em) {
+
+	h1 {
+		font-size: 1.8em;
+	}
+
+	h2 {
+		font-size: 1.6em;
+	}
+
+	h3 {
+		font-size: 1.4em;
+	}
+
+	h4, h5, h6 {
+		font-size: 1.2em;
+	}
+
+	.site-header {
+		font-size: 0.8em;
+	}
+
+	.post-list {
+		.title {
+			font-size: 1.92em;
+		}
+	}
+
+}
+
+@media only screen and (max-width: 30em) {
+
+	body {
+		font-size: 10pt;
+	}
+
+	.page-nav {
+		.nav-button {
+			width: 2em;
+			height: 2em;
+		}
+	}
+
+}
