@@ -1,12 +1,12 @@
 /*!
- * u.js - Version 0.14.0 - IE 9 fix
+ * u.js - Version 0.19.0 - IE 9 fix
  * Fix for the missing classList in IE 9
  * Author: Steve Ottoz <so@dev.so>
- * Build date: 2015-07-16
+ * Build date: 2015-11-19
  * Copyright (c) 2015 Steve Ottoz
  * Released under the MIT license
  */
-(function(u,window,document) {
+;(function(u, window, document) {
   'use strict';
 
 
@@ -85,4 +85,4 @@
   });
 
 
-})(u,window,document);
+})(u, window, document);
