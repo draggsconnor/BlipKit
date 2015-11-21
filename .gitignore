@@ -4,3 +4,5 @@ _site
 .ftppass
 *.map
 js/main.min.js
+.jekyll-metadata
+node_modules
