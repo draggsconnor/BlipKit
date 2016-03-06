@@ -1,9 +1,5 @@
 $(function () {
 
-	$('.nav-button').on('click', function () {
-		$(this).parents('.page-nav').toggleClass('open');
-	});
-
 	var soundInstances = {};
 
 	$('.player .button').on('click', function (e) {
