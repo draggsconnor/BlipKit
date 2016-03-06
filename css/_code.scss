@@ -38,6 +38,17 @@ code {
 	}
 }
 
+/* Jekyll element */
+figure.highlight {
+	margin-top: $line-height;
+	padding: 0;
+
+	pre {
+		margin-top: 0;
+		background: none;
+	}
+}
+
 p, dt {
 	code, var {
 		font: $code-font;
