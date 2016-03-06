@@ -24,6 +24,7 @@
 
 		.nav-button {
 			display: block;
+			transition: transform ease-out 0.15s;
 		}
 
 		& > .page-nav-content {
@@ -32,13 +33,6 @@
 			position: relative;
 			@include box-shadow(0px, 2em, 4em, white);
 
-		}
-
-		&.open {
-			& > .page-nav-content {
-				display: block;
-				padding-bottom: #{$line-height};
-			}
 		}
 	}
 
@@ -72,6 +66,18 @@
 		}
 	}
 
+	.page-nav {
+		.nav-toggle {
+			&:checked ~ .page-nav-content {
+				display: block;
+			}
+
+			&:checked ~ .nav-button {
+				transform: rotate(90deg);
+			}
+		}
+	}
+
 }
 
 @media only screen and (max-width: 30em) {
@@ -84,6 +90,10 @@
 		.nav-button {
 			width: 2em;
 			height: 2em;
+		}
+
+		.page-nav-content {
+			display: none;
 		}
 	}
 
