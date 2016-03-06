@@ -4,8 +4,11 @@ pre {
 	background: url(img/lines-gray.svg) center top local;
 	-webkit-overflow-scrolling: touch;
 	font-size: 0.9em;
-    white-space: pre;
-    word-wrap: normal;
+	white-space: pre;
+	word-wrap: normal;
+	-o-tab-size: 4;
+	-moz-tab-size: 4;
+	tab-size: 4;
 
 	code {
 		display: block;
