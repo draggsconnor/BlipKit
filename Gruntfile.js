@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 					authKey: 'monoxid'
 				},
 				src: '_site',
-				dest: '/domains/blipkit.audio',
+				dest: '/domains/blipkit.audio/htdocs',
 				exclusions: ['_site/**/.DS_Store', '_site/**/Thumbs.db'],
 				forceVerbose: true
 			}
