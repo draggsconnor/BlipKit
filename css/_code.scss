@@ -2,7 +2,6 @@
 
 pre {
 	background: url(img/lines-gray.svg) center top local;
-	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	font-size: 0.9em;
     white-space: pre;
@@ -11,6 +10,7 @@ pre {
 	code {
 		display: block;
 		padding: $line-height;
+		overflow: auto;
 	}
 }
 
