@@ -78,7 +78,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-jekyll');
 	grunt.loadNpmTasks('grunt-sftp-deploy');
 
-	grunt.registerTask('build', [
+	grunt.registerTask('default', [
 		'uglify',
 		'jekyll:build',
 		'dataUri',
@@ -86,12 +86,12 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('server', [
-		'build',
+		'default',
 		'jekyll:server'
 	]);
 
 	grunt.registerTask('deploy', [
-		'build',
+		'default',
 		'sftp-deploy'
 	]);
 
