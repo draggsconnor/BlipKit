@@ -1,14 +1,12 @@
 /* @group Theme */
 
+$header-footer-border: 2px solid rgba(0, 0, 0, 0.05);
+
 body,
 .site-header,
 .site-footer,
 figure {
 	background: url(img/lines-gray.svg) center top fixed;
-}
-
-figure {
-	background-attachment: local;
 }
 
 .main-wrapper {
@@ -28,7 +26,13 @@ a {
 	}
 }
 
+.site-header {
+	border-bottom: $header-footer-border;
+}
+
 .site-footer {
+	border-top: $header-footer-border;
+
 	.wrapper {
 		padding-top: 1em;
 	}
@@ -106,6 +110,14 @@ strong .button {
 	}
 }
 
+.page-nav {
+	li.current {
+		a {
+			color: #1e3768;
+		}
+	}
+}
+
 .site-title a,
 .page-meta-nav .icon a {
 	position: relative;
@@ -158,6 +170,12 @@ article {
 			}
 		}
 	}
+}
+
+figure {
+	padding: $line-height;
+	background-attachment: local;
+	@include box-sizing(border-box);
 }
 
 /* @end */

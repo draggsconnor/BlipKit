@@ -50,6 +50,11 @@ body {
 	margin-bottom: $header-height;
 }
 
+.site-footer,
+.site-header {
+	box-sizing: border-box;
+}
+
 .site-title {
 	width: 6.5em;
 	padding: 1em 0 0 0.66em;
@@ -149,7 +154,7 @@ nav {
 
 .page-meta-nav {
 	float: right;
-	padding: 1.5em 1.5em 0 0;
+	padding: 1.1em 1.1em 0 0;
 
 	li.icon {
 		line-height: 2em;
@@ -163,7 +168,7 @@ nav {
 			font-size: 2.6em;
 
 			.monoxidicon {
-				color: rgba(48, 48, 48, 0.66);
+				color: rgba(48, 48, 48, 0.75);
 				@include transition(color linear 0.1s);
 			}
 

@@ -16,8 +16,8 @@ $link-color: #6080c0;
 $link-hover-color: #294b8f;
 
 $page-width: 60em;
-$header-height: 5em;
-$footer-height: 10em;
+$header-height: 4.4em;
+$footer-height: 9.4em;
 $footer-top-margin: 5em;
 
 $small-screen-width: #{$page-width * 0.75};
@@ -32,7 +32,7 @@ $header-transition-time: 0.5s;
 @import '_layout';
 @import '_theme';
 @import '_code';
-@import '_responsive';
-@import '_player';
 @import '_comments';
 @import '_icons';
+@import '_responsive';
+@import '_player';
