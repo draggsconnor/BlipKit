@@ -56,17 +56,17 @@ body {
 }
 
 .site-title {
-	width: 6.5em;
+	width: 5.4em;
 	padding: 1em 0 0 0.66em;
 	margin: 0 0.66em -1.5em 0;
 	float: left;
 
 	a {
 		height: 0;
-		padding-bottom: 86.505190311%;
+		padding-bottom: 44.44%;
 		display: block;
 		text-indent: -9999px;
-		@include background-resizable('img/monoxid.svg', 100%);
+		@include background-resizable('img/logo.svg', 100%);
 	}
 }
 
